@@ -10,6 +10,7 @@ export const StyledRowContainer = styled("div")`
   margin: 0 auto; */
   transition: all 0.2s ease-in-out 0s;
   position: relative;
+  /* padding: 16px; */
 
   .rowCreatorActions {
     opacity: 0;

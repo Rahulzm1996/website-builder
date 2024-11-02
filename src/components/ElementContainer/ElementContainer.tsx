@@ -1,7 +1,5 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined";
-import ArrowUpwardOutlinedIcon from "@mui/icons-material/ArrowUpwardOutlined";
 import Tooltip from "@mui/material/Tooltip";
 import { Stack } from "@mui/material";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
@@ -9,89 +7,58 @@ import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
-import { StyledRowContainer } from "./styles";
-import { AddNewRowAndElementPlaceholder } from "../AddNewRowOrElement";
-import {
-  useFormBuilderDispatch,
-  useFormBuilderSelector,
-} from "../../store/store";
-import {
-  addMoreRow,
-  cloneSectionRow,
-  deleteSectionRow,
-  moveSectionRow,
-} from "../../store/formBuilderSlice";
+import { StyledElementContainer } from "./styles";
+import { useFormBuilderDispatch } from "../../store/store";
+import { cloneElement } from "../../store/formBuilderSlice";
 
 interface ElementContainerProps {
   sectionIdx: number;
   rowIdx: number;
-  rowId: number;
-  isFirstRowOfSection: boolean;
-  isLastRowOfSection: boolean;
-  children: () => React.ReactNode;
+  columnIdx: number;
+  children: JSX.Element;
 }
 const ElementContainer = (props: ElementContainerProps) => {
   const dispatch = useFormBuilderDispatch();
   // const sections = useFormBuilderSelector(
   //   (state) => state.formBuilder.sections
   // );
-  const {
-    sectionIdx,
-    rowIdx,
-    rowId,
-    isFirstRowOfSection,
-    isLastRowOfSection,
-    children,
-  } = props || {};
-  const handleAddMoreRow = () => {
-    dispatch(addMoreRow({ sectionIdx }));
+  const { sectionIdx, rowIdx, columnIdx, children } = props || {};
+
+  const handleElementSetting = () => {
+    console.log("handleElementSetting");
+    // dispatch(addMoreRow({ sectionIdx }));
   };
 
-  const handleMoveRow = ({ direction }: { direction: "up" | "down" }) => {
-    dispatch(moveSectionRow({ sectionIdx, rowIdx, direction }));
+  const handleCloneElement = () => {
+    console.log("handleCloneElement");
+    dispatch(cloneElement({ sectionIdx, rowIdx }));
   };
 
-  const handleCloneRow = () => {
-    dispatch(cloneSectionRow({ sectionIdx, rowIdx }));
+  const handleDeleteElement = () => {
+    console.log("handleDeleteElement");
+    // dispatch(deleteSectionRow({ sectionIdx, rowId }));
   };
-
-  const handleDeleteRow = () => {
-    dispatch(deleteSectionRow({ sectionIdx, rowId }));
+  const handleAddNewElement = () => {
+    console.log("handleAddNewElement");
+    // dispatch(deleteSectionRow({ sectionIdx, rowId }));
   };
 
   return (
-    <StyledRowContainer className="rowContainer">
-      <Box className="rowCreatorActions">
-        <Stack className="moveActions">
-          {!isFirstRowOfSection ? (
-            <Tooltip title="Up" placement="top" arrow>
-              <Stack
-                className="iconWrapper"
-                onClick={() => handleMoveRow({ direction: "up" })}
-              >
-                <ArrowUpwardOutlinedIcon className="icon" />
-              </Stack>
-            </Tooltip>
-          ) : null}
-          {!isLastRowOfSection ? (
-            <Tooltip title="Down" placement="top" arrow>
-              <Stack
-                className="iconWrapper"
-                onClick={() => handleMoveRow({ direction: "down" })}
-              >
-                <ArrowDownwardOutlinedIcon className="icon" />
-              </Stack>
-            </Tooltip>
-          ) : null}
-        </Stack>
-        <Stack className="moreActions">
-          <Tooltip title="Settings" placement="top" arrow>
+    <StyledElementContainer className="elementContainer">
+      <Box className="elementCreatorActions">
+        <Stack className="moreElementActions">
+          <Tooltip
+            title="Settings"
+            placement="top"
+            arrow
+            onClick={handleElementSetting}
+          >
             <Stack className="iconWrapper">
               <SettingsOutlinedIcon className="icon" />
             </Stack>
           </Tooltip>
           <Tooltip title="Clone" placement="top" arrow>
-            <Stack className="iconWrapper" onClick={handleCloneRow}>
+            <Stack className="iconWrapper" onClick={handleCloneElement}>
               <RemoveRedEyeOutlinedIcon className="icon" />
             </Stack>
           </Tooltip>
@@ -101,24 +68,22 @@ const ElementContainer = (props: ElementContainerProps) => {
             </Stack>
           </Tooltip>
           <Tooltip title="Delete" placement="top" arrow>
-            <Stack className="iconWrapper" onClick={handleDeleteRow}>
+            <Stack className="iconWrapper" onClick={handleDeleteElement}>
               <DeleteOutlineOutlinedIcon className="icon" />
             </Stack>
           </Tooltip>
         </Stack>
       </Box>
-      {isLastRowOfSection ? (
-        <Stack className="addNewRow">
-          <Tooltip title="Add new Row" placement="bottom" arrow>
-            <Stack className="iconWrapper" onClick={handleAddMoreRow}>
-              <AddOutlinedIcon className="icon" />
-            </Stack>
-          </Tooltip>
-        </Stack>
-      ) : null}
+      <Stack className="addNewElement">
+        <Tooltip title="Add New Element" placement="bottom" arrow>
+          <Stack className="iconWrapper" onClick={handleAddNewElement}>
+            <AddOutlinedIcon className="icon" />
+          </Stack>
+        </Tooltip>
+      </Stack>
 
-      {children && children()}
-    </StyledRowContainer>
+      {children}
+    </StyledElementContainer>
   );
 };
 export default ElementContainer;

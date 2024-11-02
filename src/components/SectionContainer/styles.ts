@@ -29,11 +29,11 @@ export const StyledSectionContainer = styled("section")`
     border: 2px solid #37ca37;
     .creatorActions {
       opacity: 1;
-      transition: all 0.2s ease-in-out 0s;
+      /* transition: all 0.2s ease-in-out 0s; */
     }
     .AddNewSection {
       opacity: 1;
-      transition: all 0.2s ease-in-out 0s;
+      /* transition: all 0.2s ease-in-out 0s; */
     }
   }
 

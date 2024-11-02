@@ -60,6 +60,13 @@ const formBuilderSlice = createSlice({
         (row) => row.id !== rowId
       );
     },
+    cloneElement: (state, { payload }) => {
+      const { sectionIdx, rowId } = payload || {};
+      const currentSectionRows = state.sections[sectionIdx].rows;
+      state.sections[sectionIdx].rows = currentSectionRows.filter(
+        (row) => row.id !== rowId
+      );
+    },
   },
 });
 
@@ -70,5 +77,6 @@ export const {
   moveSectionRow,
   cloneSectionRow,
   deleteSectionRow,
+  cloneElement,
 } = formBuilderSlice.actions;
 export default formBuilderSlice.reducer;

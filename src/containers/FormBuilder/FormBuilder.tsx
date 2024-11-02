@@ -12,7 +12,13 @@ import {
 import Stack from "@mui/material/Stack";
 import { addElement, addNewRow } from "../../store/formBuilderSlice";
 import Box from "@mui/material/Box";
-import { AddNewRowOrElement, Headline, SubHeadline } from "../../components";
+import {
+  AddNewRowOrElement,
+  DynamicElementContainer,
+  ElementContainer,
+  Headline,
+  SubHeadline,
+} from "../../components";
 import { ComponentProperties } from "../../types";
 
 interface RenderColumnComponent {
@@ -69,17 +75,25 @@ const FormBuilder = () => {
       case ComponentTypes.HEADLINE: {
         // return <Headline {...{ ...props }} />;
         return (
-          <Stack key={columnIdx} className="column">
-            <Headline {...{ ...props }} />
-          </Stack>
+          <DynamicElementContainer
+            component={Headline}
+            sectionIdx={sectionIdx}
+            rowIdx={rowIdx}
+            columnIdx={columnIdx}
+            {...props}
+          />
         );
       }
       case ComponentTypes.SUB_HEADLINE: {
         // return <SubHeadline {...{ ...props }} />;
         return (
-          <Stack key={columnIdx} className="column">
-            <SubHeadline {...{ ...props }} />
-          </Stack>
+          <DynamicElementContainer
+            component={SubHeadline}
+            sectionIdx={sectionIdx}
+            rowIdx={rowIdx}
+            columnIdx={columnIdx}
+            {...props}
+          />
         );
       }
       default:

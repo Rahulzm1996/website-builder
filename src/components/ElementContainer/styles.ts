@@ -1,93 +1,110 @@
 import styled from "styled-components";
 
-export const StyledRowContainer = styled("div")`
+export const StyledElementContainer = styled("div")`
   min-height: 104px;
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+  /* margin-right: -15px;
+  margin-left: -15px; */
   /* max-width: 1200px;
   margin: 0 auto; */
+  margin: 16px;
   transition: all 0.2s ease-in-out 0s;
   position: relative;
 
-  .rowCreatorActions {
+  .elementCreatorActions {
     opacity: 0;
-    transition: all 0.2s ease-in-out 0s;
+    /* transition: all 0.2s ease-in-out 0s; */
 
-    .moveActions {
-      display: flex;
-      flex-direction: row;
-      position: absolute;
-      top: -25px;
-      left: 0;
-      z-index: 2;
-    }
-    .moreActions {
+    .moreElementActions {
       display: flex;
       flex-direction: row;
       position: absolute;
       top: -25px;
       right: -2px;
-      z-index: 3;
+      z-index: 4;
+
+      .iconWrapper {
+        align-items: center;
+        justify-content: center;
+        width: 25px;
+        height: 25px;
+        background-color: #ff7402;
+        /* transition: all 0.2s ease-in-out 0s; */
+        cursor: pointer;
+
+        &:hover {
+          background: #e86800;
+        }
+      }
+      .icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 16px;
+        height: 16px;
+        color: #fff;
+        /* transition: all 0.2s ease-in-out 0s; */
+        font-size: 0.75rem;
+      }
     }
   }
 
   &:hover {
-    border: 2px solid #188bf6;
-    .rowCreatorActions {
+    border: 2px solid #ff7402;
+    .elementCreatorActions {
       opacity: 1;
-      transition: all 0.2s ease-in-out 0s;
+      /* transition: all 0.2s ease-in-out 0s; */
     }
-    .addNewRow {
+    .addNewElement {
       opacity: 1;
-      transition: all 0.2s ease-in-out 0s;
+      /* transition: all 0.2s ease-in-out 0s; */
     }
   }
 
-  .iconWrapper {
-    align-items: center;
-    justify-content: center;
-    width: 25px;
-    height: 25px;
-    background-color: #188bf6;
-    transition: all 0.2s ease-in-out 0s;
-    cursor: pointer;
-
-    &:hover {
-      background: #097eeb;
-    }
-  }
-  .icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 16px;
-    height: 16px;
-    color: #fff;
-    transition: all 0.2s ease-in-out 0s;
-    font-size: 0.75rem;
-  }
-
-  .addNewRow {
+  .addNewElement {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background-color: #188bf6;
+    background-color: #ff7402;
     color: #fff;
     font-size: 12px;
     cursor: pointer;
-    transition: all 0.2s ease-in-out 0s;
+    /* transition: all 0.2s ease-in-out 0s; */
     position: absolute;
     margin: auto;
     left: 0;
     right: 0;
     bottom: -12px;
-    z-index: 3;
+    z-index: 4;
     opacity: 0;
+
+    .iconWrapper {
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      background-color: #ff7402;
+      /* transition: all 0.2s ease-in-out 0s; */
+      cursor: pointer;
+
+      &:hover {
+        background: #e86800;
+      }
+    }
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 16px;
+      height: 16px;
+      color: #fff;
+      /* transition: all 0.2s ease-in-out 0s; */
+      font-size: 0.75rem;
+    }
 
     :hover {
       opacity: 1;
