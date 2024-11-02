@@ -1,15 +1,14 @@
-export interface ComponentTypes {
+import { ComponentTypes } from "./contants";
+
+export interface ComponentProperties {
   type: string;
   span?: number[];
-  props?: {
-    value: string;
-    label: string;
-  };
+  props?: any;
 }
 
 export interface EmptyRow {
   id: number | string;
-  components: ComponentTypes[];
+  components: ComponentProperties[];
   rowStyles?: React.CSSProperties;
   isDisabled?: boolean;
   isPinned?: boolean;

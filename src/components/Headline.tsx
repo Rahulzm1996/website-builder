@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import React from "react";
 import { TypographyProps } from "@mui/material";
 
@@ -8,13 +8,15 @@ interface HeadlineProps {
   variant: TypographyProps["variant"];
 }
 
-const Headline: React.FC<HeadlineProps> = (props) => {
+const Headline = (props: HeadlineProps) => {
   const { text, variant = "h5", css } = props;
 
   return (
-    <Typography variant={variant} sx={{ ...css }}>
-      {text ?? "Heading text"}
-    </Typography>
+    <Stack>
+      <Typography variant={variant} sx={{ ...css }}>
+        {text ?? "Heading text"}
+      </Typography>
+    </Stack>
   );
 };
 

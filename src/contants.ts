@@ -1,4 +1,4 @@
-import { Headline, SubHeadline } from "./components";
+import { AddNewRowOrElement, Headline, SubHeadline } from "./components";
 import { StoreState } from "./types";
 import { v4 as uuidv4 } from "uuid";
 
@@ -24,18 +24,6 @@ const row = [
 
 //row[rowIndex].components[columnIndex]
 
-// const propMapTypes =  {
-//   select: {
-//     type: "onFiled" | "drawer";
-//     fieldProps: {
-//       key: "";
-//       type: "string";
-//       placeholder: "";
-//       defaultValue: "";
-//     };
-//   };
-// };
-
 /*
 Assuming we dont have poer to add more sections then
 if sections is empty that means we need to show empty add new row placeholder
@@ -50,11 +38,6 @@ export const initialState: StoreState = {
     },
   ],
 };
-
-export const ComponentTypes = {
-  emptyRowComponent: "emptyRowComponent",
-  emptyColumnComponent: "emptyColumnComponent",
-} as const;
 
 const section = [
   {
@@ -100,7 +83,35 @@ const section = [
   },
 ];
 
-export const componentTypesMap = {
+export const ComponentTypes = {
+  EMPTY_ROW: "EMPTY_ROW",
+  EMPTY_ELEMENT: "EMPTY_ELEMENT",
+  HEADLINE: "HEADLINE",
+  SUB_HEADLINE: "SUB_HEADLINE",
+};
+
+export const ComponentTypesMap = {
+  EMPTY_ROW: AddNewRowOrElement,
+  EMPTY_ELEMENT: AddNewRowOrElement,
   HEADLINE: Headline,
   SUB_HEADLINE: SubHeadline,
+};
+
+const componentDefaultPropsMap = {
+  HEADLINE: {
+    // type: "onFiled" | "drawer";
+    fieldProps: {
+      text: "Heading text",
+      // placeholder: "",
+      // defaultValue: "",
+    },
+  },
+  SUB_HEADLINE: {
+    // type: "onFiled" | "drawer";
+    fieldProps: {
+      text: "Sub heading text",
+      // placeholder: "",
+      // defaultValue: "",
+    },
+  },
 };

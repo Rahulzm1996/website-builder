@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import React from "react";
 import { TypographyProps } from "@mui/material";
 
@@ -8,13 +8,15 @@ interface SubHeadlineProps {
   variant: TypographyProps["variant"];
 }
 
-const SubHeadline: React.FC<SubHeadlineProps> = (props) => {
+const SubHeadline = (props: SubHeadlineProps) => {
   const { text, variant = "subtitle1", css } = props;
 
   return (
-    <Typography variant={variant} sx={{ ...css }}>
-      {text ?? "Sub heading text"}
-    </Typography>
+    <Stack>
+      <Typography variant={variant} sx={{ ...css }}>
+        {text ?? "Sub heading text"}
+      </Typography>
+    </Stack>
   );
 };
 

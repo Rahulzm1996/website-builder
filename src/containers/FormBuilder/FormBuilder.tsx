@@ -4,15 +4,23 @@ import { RowContainer } from "../../components/RowContainer";
 import { ElementsDrawer } from "../ElementsDrawer";
 import { ColumnLayoutSidebar } from "../ColumnLayoutSidebar";
 import { useSelector } from "react-redux";
-import { StoreState } from "../../contants";
+import { ComponentTypes, ComponentTypesMap, StoreState } from "../../contants";
 import {
   useFormBuilderDispatch,
   useFormBuilderSelector,
 } from "../../store/store";
 import Stack from "@mui/material/Stack";
-import { AddNewRowAndElementPlaceholder } from "../../components/AddNewRowAndElementPlaceholder";
-import { addNewRow } from "../../store/formBuilderSlice";
+import { addElement, addNewRow } from "../../store/formBuilderSlice";
 import Box from "@mui/material/Box";
+import { AddNewRowOrElement, Headline, SubHeadline } from "../../components";
+import { ComponentProperties } from "../../types";
+
+interface RenderColumnComponent {
+  sectionIdx: number;
+  rowIdx: number;
+  columnIdx: number;
+  singleRowComponent: ComponentProperties;
+}
 
 const FormBuilder = () => {
   const dispatch = useFormBuilderDispatch();
@@ -21,6 +29,63 @@ const FormBuilder = () => {
   );
 
   console.log("sections ", { sections });
+
+  const handleAddNewElement = ({
+    sectionIdx,
+    rowIdx,
+    columnIdx,
+  }: Partial<RenderColumnComponent>) => {
+    console.log("handle new element called : ", {
+      sectionIdx,
+      rowIdx,
+      columnIdx,
+    });
+    dispatch(addElement({ sectionIdx, rowIdx, columnIdx }));
+  };
+
+  const renderColumnComponent = ({
+    sectionIdx,
+    rowIdx,
+    columnIdx,
+    singleRowComponent,
+  }: RenderColumnComponent) => {
+    console.log("renderColumnComponent : ", { singleRowComponent });
+    const { type, props } = singleRowComponent || {};
+
+    switch (type) {
+      case ComponentTypes.EMPTY_ELEMENT: {
+        return (
+          <Stack key={columnIdx} className="column">
+            <AddNewRowOrElement
+              onClick={() => {
+                handleAddNewElement({ sectionIdx, rowIdx, columnIdx });
+              }}
+              buttonText="Add new Element"
+              variant="element"
+            />
+          </Stack>
+        );
+      }
+      case ComponentTypes.HEADLINE: {
+        // return <Headline {...{ ...props }} />;
+        return (
+          <Stack key={columnIdx} className="column">
+            <Headline {...{ ...props }} />
+          </Stack>
+        );
+      }
+      case ComponentTypes.SUB_HEADLINE: {
+        // return <SubHeadline {...{ ...props }} />;
+        return (
+          <Stack key={columnIdx} className="column">
+            <SubHeadline {...{ ...props }} />
+          </Stack>
+        );
+      }
+      default:
+        break;
+    }
+  };
 
   return (
     <Stack mt={"2px"}>
@@ -47,21 +112,13 @@ const FormBuilder = () => {
                       isLastRowOfSection={isLastRowOfSection}
                     >
                       {() => {
-                        return components.map(
-                          (singleRowComponent, columnIdx) => {
-                            //render different component based on type of component here default is empty rowElement component
-                            return (
-                              <Stack key={columnIdx} className="column">
-                                <AddNewRowAndElementPlaceholder
-                                  onClick={() => {
-                                    console.log("add New Element clicked");
-                                  }}
-                                  buttonText="Add new Element"
-                                  variant="element"
-                                />
-                              </Stack>
-                            );
-                          }
+                        return components.map((singleRowComponent, columnIdx) =>
+                          renderColumnComponent({
+                            sectionIdx,
+                            rowIdx,
+                            columnIdx,
+                            singleRowComponent,
+                          })
                         );
                       }}
                     </RowContainer>
@@ -69,10 +126,10 @@ const FormBuilder = () => {
                 })}
 
                 {rows.length === 0 ? (
-                  <AddNewRowAndElementPlaceholder
+                  <AddNewRowOrElement
                     onClick={() => {
                       console.log("add New section clicked");
-                      dispatch(addNewRow({ sectionIndex: sectionIdx }));
+                      dispatch(addNewRow({ sectionIdx }));
                       /*
                   open drawer and select columns layout and then insert row
                   */

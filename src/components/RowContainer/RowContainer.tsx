@@ -10,7 +10,7 @@ import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { StyledRowContainer } from "./styles";
-import { AddNewRowAndElementPlaceholder } from "../AddNewRowAndElementPlaceholder";
+import { AddNewRowAndElementPlaceholder } from "../AddNewRowOrElement";
 import {
   useFormBuilderDispatch,
   useFormBuilderSelector,
@@ -38,7 +38,7 @@ const RowContainer = (props: RowContainerProps) => {
     //   props,
     // });
 
-    dispatch(addMoreRow({ sectionIndex: sectionIdx }));
+    dispatch(addMoreRow({ sectionIdx }));
   };
 
   return (
