@@ -28,18 +28,18 @@ const FormBuilder = () => {
     (state) => state.formBuilder.sections
   );
 
-  console.log("sections ", { sections });
+  // console.log("sections ", { sections });
 
   const handleAddNewElement = ({
     sectionIdx,
     rowIdx,
     columnIdx,
   }: Partial<RenderColumnComponent>) => {
-    console.log("handle new element called : ", {
-      sectionIdx,
-      rowIdx,
-      columnIdx,
-    });
+    // console.log("handle new element called : ", {
+    //   sectionIdx,
+    //   rowIdx,
+    //   columnIdx,
+    // });
     dispatch(addElement({ sectionIdx, rowIdx, columnIdx }));
   };
 
@@ -49,7 +49,7 @@ const FormBuilder = () => {
     columnIdx,
     singleRowComponent,
   }: RenderColumnComponent) => {
-    console.log("renderColumnComponent : ", { singleRowComponent });
+    // console.log("renderColumnComponent : ", { singleRowComponent });
     const { type, props } = singleRowComponent || {};
 
     switch (type) {
@@ -93,7 +93,7 @@ const FormBuilder = () => {
         {() => {
           return sections.map((singleSection, sectionIdx) => {
             const { id, rows } = singleSection || {};
-            console.log("single section : ", { id, rows, sectionIdx });
+            // console.log("single section : ", { id, rows, sectionIdx });
             return (
               <Stack
                 key={id}
@@ -101,14 +101,17 @@ const FormBuilder = () => {
                 sx={{ maxWidth: "1200px", margin: "0 auto" }}
               >
                 {rows.map((singleRow, rowIdx) => {
-                  console.log("singleRow : ", { singleRow, rowIdx });
+                  // console.log("singleRow : ", { singleRow, rowIdx });
                   const { id, components } = singleRow || {};
+                  const isFirstRowOfSection = rowIdx === 0;
                   const isLastRowOfSection = rowIdx === rows.length - 1;
                   return (
                     <RowContainer
                       key={id}
                       sectionIdx={sectionIdx}
                       rowIdx={rowIdx}
+                      rowId={id}
+                      isFirstRowOfSection={isFirstRowOfSection}
                       isLastRowOfSection={isLastRowOfSection}
                     >
                       {() => {
@@ -128,7 +131,6 @@ const FormBuilder = () => {
                 {rows.length === 0 ? (
                   <AddNewRowOrElement
                     onClick={() => {
-                      console.log("add New section clicked");
                       dispatch(addNewRow({ sectionIdx }));
                       /*
                   open drawer and select columns layout and then insert row

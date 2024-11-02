@@ -22,7 +22,7 @@ import {
   moveSectionRow,
 } from "../../store/formBuilderSlice";
 
-interface RowContainerProps {
+interface ElementContainerProps {
   sectionIdx: number;
   rowIdx: number;
   rowId: number;
@@ -30,7 +30,7 @@ interface RowContainerProps {
   isLastRowOfSection: boolean;
   children: () => React.ReactNode;
 }
-const RowContainer = (props: RowContainerProps) => {
+const ElementContainer = (props: ElementContainerProps) => {
   const dispatch = useFormBuilderDispatch();
   // const sections = useFormBuilderSelector(
   //   (state) => state.formBuilder.sections
@@ -121,4 +121,4 @@ const RowContainer = (props: RowContainerProps) => {
     </StyledRowContainer>
   );
 };
-export default RowContainer;
+export default ElementContainer;
