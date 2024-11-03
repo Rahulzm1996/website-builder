@@ -44,7 +44,20 @@ const ElementContainer = (props: ElementContainerProps) => {
   };
 
   return (
-    <StyledElementContainer className="elementContainer">
+    <StyledElementContainer
+      className="elementContainer"
+      item
+      xs={12} // 100% width on extra-small screens (1 item per row)
+      sm={6} // 50% width on small screens (2 items per row)
+      md={4} // 33.33% width on medium screens (3 items per row)
+      lg={3} // 25% width on large screens (4 items per row)
+      xl={2} // 20% width on extra-large screens (5 items per row)
+      // sx={{
+      //   // flexBasis: "200px", // Minimum width of 200px
+      //   flexGrow: 1, // Allow items to grow to fill space
+      //   maxWidth: "100%", // Prevent items from overflowing
+      // }}
+    >
       <Box className="elementCreatorActions">
         <Stack className="moreElementActions">
           <Tooltip

@@ -25,6 +25,12 @@ const formBuilderSlice = createSlice({
         getEmptyRow(numberOfColumns)
       );
     },
+    toggleAddElementsDrawer: (state, { payload }) => {
+      // console.log("add new row reducer called : ", { state, payload });
+      const { open, elementAttributes } = payload || {};
+      state.elementsDrawerConfig.open = open;
+      state.elementsDrawerConfig.elementAttributes = elementAttributes;
+    },
     // addColumnInRow: (state, { payload }) => {
     //   // console.log("add more reducer called : ", { state, payload });
     //   const { sectionIdx } = payload || {};
@@ -33,18 +39,14 @@ const formBuilderSlice = createSlice({
     //   );
     // },
     addElement: (state, { payload }) => {
-      const { sectionIdx, rowIdx, columnIdx, componentType } = payload || {};
+      const { sectionIdx, rowIdx, columnIdx, componentToBeAdded } =
+        payload || {};
       //type and props will come from outside
       const currentColumn =
         state.sections[sectionIdx].rows[rowIdx].components[columnIdx];
       state.sections[sectionIdx].rows[rowIdx].components[columnIdx] = {
         ...currentColumn,
-        type: "HEADLINE",
-        props: {
-          text: `${sectionIdx + 1} - ${rowIdx + 1} - ${
-            columnIdx + 1
-          } - "testing heading text`,
-        },
+        ...componentToBeAdded,
       };
     },
     moveSectionRow: (state, { payload }) => {
@@ -88,6 +90,7 @@ export const {
   addNewRow,
   addMoreRow,
   // addColumnInRow,
+  toggleAddElementsDrawer,
   addElement,
   moveSectionRow,
   cloneSectionRow,

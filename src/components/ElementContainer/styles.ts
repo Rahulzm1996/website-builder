@@ -1,6 +1,7 @@
+import { Grid } from "@mui/material";
 import styled from "styled-components";
 
-export const StyledElementContainer = styled("div")`
+export const StyledElementContainer = styled(Grid)`
   min-height: 104px;
   display: flex;
   flex-wrap: wrap;

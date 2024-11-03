@@ -18,6 +18,11 @@ type LayoutAttributes = {
   sectionIdx?: number;
   mode: "new" | "existing";
 };
+type ElementAttributes = {
+  sectionIdx?: number;
+  rowIdx?: number;
+  columnIdx?: number;
+};
 
 export interface StoreState {
   sections: {
@@ -26,7 +31,10 @@ export interface StoreState {
   }[];
   columnsDrawerConfig: {
     open: boolean;
-
     layoutAttributes: LayoutAttributes;
+  };
+  elementsDrawerConfig: {
+    open: boolean;
+    elementAttributes: ElementAttributes;
   };
 }

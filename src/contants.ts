@@ -42,6 +42,12 @@ export const initialState: StoreState = {
     layoutAttributes: {
       mode: "new",
       sectionIdx: 0,
+    },
+  },
+  elementsDrawerConfig: {
+    open: false,
+    elementAttributes: {
+      sectionIdx: 0,
       rowIdx: 0,
       columnIdx: 0,
     },
@@ -97,6 +103,16 @@ export const ComponentTypes = {
   EMPTY_ELEMENT: "EMPTY_ELEMENT",
   HEADLINE: "HEADLINE",
   SUB_HEADLINE: "SUB_HEADLINE",
+  PARAGRAPH: "PARAGRAPH",
+  LIST: "LIST",
+  IMAGE: "IMAGE",
+  VIDEO: "VIDEO",
+  AUDIO: "AUDIO",
+  FORM: "FORM",
+  INPUT: "INPUT",
+  TEXTAREA: "TEXTAREA",
+  SELECT: "SELECT",
+  CHECKBOX: "CHECKBOX",
 };
 
 export const ComponentTypesMap = {
@@ -106,16 +122,32 @@ export const ComponentTypesMap = {
   SUB_HEADLINE: SubHeadline,
 };
 
-const componentDefaultPropsMap = {
-  HEADLINE: {
+export const componentDefaultPropsMap = {
+  [ComponentTypes.HEADLINE]: {
     // type: "onFiled" | "drawer";
     fieldProps: {
-      text: "Heading text",
+      text: "Heading text...",
       // placeholder: "",
       // defaultValue: "",
     },
   },
-  SUB_HEADLINE: {
+  [ComponentTypes.SUB_HEADLINE]: {
+    // type: "onFiled" | "drawer";
+    fieldProps: {
+      text: "Sub heading text...",
+      // placeholder: "",
+      // defaultValue: "",
+    },
+  },
+  [ComponentTypes.PARAGRAPH]: {
+    // type: "onFiled" | "drawer";
+    fieldProps: {
+      text: "Sub heading text",
+      // placeholder: "",
+      // defaultValue: "",
+    },
+  },
+  [ComponentTypes.LIST]: {
     // type: "onFiled" | "drawer";
     fieldProps: {
       text: "Sub heading text",
@@ -124,3 +156,140 @@ const componentDefaultPropsMap = {
     },
   },
 };
+
+export const DRAWER_ELEMENTS = [
+  {
+    category: "Text",
+    label: "HEADLINE",
+    icon: "H",
+    type: ComponentTypes.HEADLINE,
+    disable: false,
+  },
+  {
+    category: "Text",
+    label: "SUB-HEADLINE",
+    icon: "A",
+    type: ComponentTypes.SUB_HEADLINE,
+    disable: false,
+  },
+  {
+    category: "Text",
+    label: "PARAGRAPH",
+    icon: "P",
+    type: ComponentTypes.PARAGRAPH,
+    disable: false,
+  },
+  {
+    category: "Text",
+    label: "BULLET LIST",
+    icon: "L",
+    type: ComponentTypes.LIST,
+    disable: false,
+  },
+  {
+    category: "Media",
+    label: "IMAGE",
+    icon: "🖼️",
+    type: ComponentTypes.IMAGE,
+    disable: false,
+  },
+  {
+    category: "Media",
+    label: "IMAGE POPUP",
+    icon: "🖼️",
+    type: ComponentTypes.IMAGE,
+    disable: true,
+  },
+  {
+    category: "Media",
+    label: "VIDEO",
+    icon: "▶️",
+    type: ComponentTypes.VIDEO,
+    disable: true,
+  },
+  {
+    category: "Media",
+    label: "VIDEO POPUP",
+    icon: "▶️",
+    type: ComponentTypes.VIDEO,
+    disable: true,
+  },
+  {
+    category: "Media",
+    label: "AUDIO PLAYER",
+    icon: "🔊",
+    type: ComponentTypes.AUDIO,
+    disable: true,
+  },
+  {
+    category: "Form",
+    label: "FORM INPUT",
+    icon: "📋",
+    type: ComponentTypes.HEADLINE,
+    disable: true,
+  },
+  {
+    category: "Form",
+    label: "FORM INPUT",
+    icon: "📋",
+    type: ComponentTypes.FORM,
+    disable: true,
+  },
+  {
+    category: "Form",
+    label: "FORM INPUT",
+    icon: "📋",
+    type: ComponentTypes.INPUT,
+    disable: true,
+  },
+  {
+    category: "Form",
+    label: "FORM INPUT",
+    icon: "📋",
+    type: ComponentTypes.TEXTAREA,
+    disable: true,
+  },
+  {
+    category: "Form",
+    label: "FORM INPUT",
+    icon: "📋",
+    type: ComponentTypes.SELECT,
+    disable: true,
+  },
+  {
+    category: "Form",
+    label: "FORM INPUT",
+    icon: "📋",
+    type: ComponentTypes.CHECKBOX,
+    disable: true,
+  },
+  // Advance Form
+  {
+    category: "Advance Form",
+    label: "SMS SIGN UP",
+    icon: "📋",
+    type: ComponentTypes.FORM,
+    disable: true,
+  },
+  {
+    category: "Advance Form",
+    label: "BILLING ADD",
+    icon: "📋",
+    type: ComponentTypes.FORM,
+    disable: true,
+  },
+  {
+    category: "Advance Form",
+    label: "SHIPPING ADD",
+    icon: "📋",
+    type: ComponentTypes.FORM,
+    disable: true,
+  },
+  {
+    category: "Advance Form",
+    label: "SURVEY",
+    icon: "📋",
+    type: ComponentTypes.FORM,
+    disable: true,
+  },
+];

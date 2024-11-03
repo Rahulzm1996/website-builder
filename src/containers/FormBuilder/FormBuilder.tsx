@@ -13,6 +13,7 @@ import Stack from "@mui/material/Stack";
 import {
   addElement,
   addNewRow,
+  toggleAddElementsDrawer,
   toggleColumnDrawer,
 } from "../../store/formBuilderSlice";
 import Box from "@mui/material/Box";
@@ -25,6 +26,7 @@ import {
 } from "../../components";
 import { ComponentProperties } from "../../types";
 import { SegmentedControl } from "../../components/SegmentedControl";
+import { Grid, Grid2 } from "@mui/material";
 
 interface RenderColumnComponent {
   sectionIdx: number;
@@ -35,11 +37,10 @@ interface RenderColumnComponent {
 
 const FormBuilder = () => {
   const dispatch = useFormBuilderDispatch();
-  const { sections, columnsDrawerConfig } = useFormBuilderSelector(
-    (state) => state.formBuilder
-  );
-  const { open: showColumnDrawer, layoutAttributes } =
-    columnsDrawerConfig || {};
+  const { sections, columnsDrawerConfig, elementsDrawerConfig } =
+    useFormBuilderSelector((state) => state.formBuilder);
+  const { open: showColumnDrawer } = columnsDrawerConfig || {};
+  const { open: showElementsDrawer } = elementsDrawerConfig || {};
 
   console.log("sections ", { sections, columnsDrawerConfig });
 
@@ -68,15 +69,35 @@ const FormBuilder = () => {
     switch (type) {
       case ComponentTypes.EMPTY_ELEMENT: {
         return (
-          <Stack key={columnIdx} className="column">
+          <Grid
+            item
+            xs={12} // 100% width on extra-small screens (1 item per row)
+            sm={6} // 50% width on small screens (2 items per row)
+            md={4} // 33.33% width on medium screens (3 items per row)
+            lg={3} // 25% width on large screens (4 items per row)
+            xl={2} // 20% width on extra-large screens (5 items per row)
+            // sx={{
+            //   // flexBasis: "200px", // Minimum width of 200px
+            //   flexGrow: 1, // Allow items to grow to fill space
+            //   maxWidth: "100%", // Prevent items from overflowing
+            // }}
+            key={columnIdx}
+            // className="column"
+          >
             <AddNewRowOrElement
               onClick={() => {
-                handleAddNewElement({ sectionIdx, rowIdx, columnIdx });
+                // handleAddNewElement({ sectionIdx, rowIdx, columnIdx });
+                dispatch(
+                  toggleAddElementsDrawer({
+                    open: true,
+                    elementAttributes: { sectionIdx, rowIdx, columnIdx },
+                  })
+                );
               }}
               buttonText="Add new Element"
               variant="element"
             />
-          </Stack>
+          </Grid>
         );
       }
       case ComponentTypes.HEADLINE: {
@@ -178,8 +199,8 @@ const FormBuilder = () => {
           // return <RowContainer></RowContainer>;
         }}
       </SectionContainer>
-      {/* <ElementsDrawer open={false} /> */}
-      <ColumnLayoutDrawer open={showColumnDrawer} onClose={undefined} />
+      <ElementsDrawer open={showElementsDrawer} />
+      <ColumnLayoutDrawer open={showColumnDrawer} />
     </Stack>
   );
 };
