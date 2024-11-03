@@ -285,7 +285,7 @@ const ElementsDrawer = ({ open }: ElementsDrawerProps) => {
           componentToBeAdded,
         })
       );
-      // closeDrawer();
+      closeDrawer();
     }
   };
 

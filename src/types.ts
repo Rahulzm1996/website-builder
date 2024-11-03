@@ -1,9 +1,15 @@
 import { ComponentTypes } from "./contants";
 
 export interface ComponentProperties {
+  id: string;
   type: string;
   span?: number[];
-  props?: any;
+  props?: {
+    text?: string;
+    styles?: React.CSSProperties;
+    src?: string;
+    alt?: string;
+  };
 }
 
 export interface EmptyRow {
@@ -23,6 +29,12 @@ type ElementAttributes = {
   rowIdx?: number;
   columnIdx?: number;
 };
+type EditElementAttributes = {
+  sectionIdx: number;
+  rowIdx: number;
+  columnIdx: number;
+  type: string;
+};
 
 export interface StoreState {
   sections: {
@@ -36,5 +48,9 @@ export interface StoreState {
   elementsDrawerConfig: {
     open: boolean;
     elementAttributes: ElementAttributes;
+  };
+  editElementDrawerConfig: {
+    open: boolean;
+    editElementAttributes: EditElementAttributes;
   };
 }

@@ -1,23 +1,3 @@
-// import React from "react";
-// import styled from "@mui/material/styles/styled";
-// import Box from "@mui/material/Box";
-
-// const StyledBox = styled(Box)(({ theme }) => ({
-//   width: "200px",
-//   height: "200px",
-//   background: theme.palette.primary.main,
-// }));
-
-// const Navbar = () => {
-//   return (
-//     <div>
-//       <StyledBox />
-//     </div>
-//   );
-// };
-
-// export default Navbar;
-
 import React from "react";
 import {
   AppBar,
@@ -27,8 +7,10 @@ import {
   Menu,
   MenuItem,
   Box,
+  styled,
+  Stack,
 } from "@mui/material";
-import { styled } from "@mui/system";
+// import { styled } from "@mui/system";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PopupIcon from "@mui/icons-material/OpenInBrowser"; // Assuming this as "Pop up" icon
@@ -38,9 +20,12 @@ import LayersIcon from "@mui/icons-material/Layers";
 import PreviewIcon from "@mui/icons-material/Visibility";
 import SaveIcon from "@mui/icons-material/Save";
 import { Fullscreen, ViewList, ViewModule, Code } from "@mui/icons-material";
+import CssBaseline from "@mui/material/CssBaseline";
+import ProfileCard from "./ProfileCard";
 
 const Navbar = styled(AppBar)(({ theme }) => ({
   //   backgroundColor: "#ddeefe",
+  boxShadow: "none",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
   },
@@ -49,6 +34,9 @@ const Navbar = styled(AppBar)(({ theme }) => ({
 const ToolbarContainer = styled(Toolbar)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
+  background: "white",
+  boxShadow: "none",
+  color: "black",
   [theme.breakpoints.down("sm")]: {
     flexDirection: "column",
     alignItems: "flex-start",
@@ -64,87 +52,17 @@ const IconGroup = styled(Box)(({ theme }) => ({
   },
 }));
 
-const tabsConfig = [
-  {
-    label: "1",
-    value: "1",
-    icon: <Fullscreen />,
-  },
-  {
-    label: "2",
-    value: "2",
-    icon: <ViewList />,
-  },
-  {
-    label: "3",
-    value: "3",
-    icon: <ViewModule />,
-  },
-  {
-    label: "4",
-    value: "4",
-    icon: <Code />,
-  },
-];
-
 const NavbarComponent = () => {
   return (
-    <Navbar position="static">
-      <ToolbarContainer>
-        {/* Left Side - Store Dropdown */}
-        <Typography variant="h6" component="div">
-          Converse Store #32
-        </Typography>
-
-        {/* Center - Action Icons */}
-        <IconGroup>
-          <IconButton color="inherit">
-            <ArrowBackIcon />
-          </IconButton>
-          <IconButton color="inherit">
-            <SettingsIcon />
-          </IconButton>
-          <IconButton color="inherit">
-            <PopupIcon />
-          </IconButton>
-        </IconGroup>
-
-        {/* Center - Section Controls */}
-        <IconGroup>
-          <IconButton color="inherit">
-            <ViewColumnIcon />
-            <Typography variant="body2">Sections</Typography>
-          </IconButton>
-          <IconButton color="inherit">
-            <LayersIcon />
-            <Typography variant="body2">Rows</Typography>
-          </IconButton>
-          <IconButton color="inherit">
-            <LayersIcon />
-            <Typography variant="body2">Columns</Typography>
-          </IconButton>
-          <IconButton color="inherit">
-            <LayersIcon />
-            <Typography variant="body2">Elements</Typography>
-          </IconButton>
-          <IconButton color="inherit">
-            <PreviewIcon />
-            <Typography variant="body2">Preview</Typography>
-          </IconButton>
-          <IconButton color="inherit">
-            <SaveIcon />
-            <Typography variant="body2">Save</Typography>
-          </IconButton>
-        </IconGroup>
-
-        {/* Right Side - Profile and Misc Icons */}
-        <IconGroup>
-          <IconButton color="inherit">
-            <AccountCircleIcon />
-          </IconButton>
-        </IconGroup>
-      </ToolbarContainer>
-    </Navbar>
+    <>
+      <CssBaseline />
+      <Navbar>
+        <ToolbarContainer>
+          <ProfileCard />
+        </ToolbarContainer>
+      </Navbar>
+      <Toolbar />
+    </>
   );
 };
 

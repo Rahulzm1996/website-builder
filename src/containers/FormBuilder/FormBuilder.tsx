@@ -19,6 +19,8 @@ import {
 import Box from "@mui/material/Box";
 import {
   AddNewRowOrElement,
+  CustomImage,
+  CustomList,
   DynamicElementContainer,
   ElementContainer,
   Headline,
@@ -27,6 +29,7 @@ import {
 import { ComponentProperties } from "../../types";
 import { SegmentedControl } from "../../components/SegmentedControl";
 import { Grid, Grid2 } from "@mui/material";
+import { ElementSettingDrawer } from "../ElementSettingDrawer";
 
 interface RenderColumnComponent {
   sectionIdx: number;
@@ -37,10 +40,15 @@ interface RenderColumnComponent {
 
 const FormBuilder = () => {
   const dispatch = useFormBuilderDispatch();
-  const { sections, columnsDrawerConfig, elementsDrawerConfig } =
-    useFormBuilderSelector((state) => state.formBuilder);
+  const {
+    sections,
+    columnsDrawerConfig,
+    elementsDrawerConfig,
+    editElementDrawerConfig,
+  } = useFormBuilderSelector((state) => state.formBuilder);
   const { open: showColumnDrawer } = columnsDrawerConfig || {};
   const { open: showElementsDrawer } = elementsDrawerConfig || {};
+  const { open: showEditElementsDrawer } = editElementDrawerConfig || {};
 
   console.log("sections ", { sections, columnsDrawerConfig });
 
@@ -86,7 +94,6 @@ const FormBuilder = () => {
           >
             <AddNewRowOrElement
               onClick={() => {
-                // handleAddNewElement({ sectionIdx, rowIdx, columnIdx });
                 dispatch(
                   toggleAddElementsDrawer({
                     open: true,
@@ -101,25 +108,49 @@ const FormBuilder = () => {
         );
       }
       case ComponentTypes.HEADLINE: {
-        // return <Headline {...{ ...props }} />;
         return (
           <DynamicElementContainer
             component={Headline}
             sectionIdx={sectionIdx}
             rowIdx={rowIdx}
             columnIdx={columnIdx}
+            type={type}
             {...props}
           />
         );
       }
       case ComponentTypes.SUB_HEADLINE: {
-        // return <SubHeadline {...{ ...props }} />;
         return (
           <DynamicElementContainer
             component={SubHeadline}
             sectionIdx={sectionIdx}
             rowIdx={rowIdx}
             columnIdx={columnIdx}
+            type={type}
+            {...props}
+          />
+        );
+      }
+      case ComponentTypes.IMAGE: {
+        return (
+          <DynamicElementContainer
+            component={CustomImage}
+            sectionIdx={sectionIdx}
+            rowIdx={rowIdx}
+            columnIdx={columnIdx}
+            type={type}
+            {...props}
+          />
+        );
+      }
+      case ComponentTypes.LIST: {
+        return (
+          <DynamicElementContainer
+            component={CustomList}
+            sectionIdx={sectionIdx}
+            rowIdx={rowIdx}
+            columnIdx={columnIdx}
+            type={type}
             {...props}
           />
         );
@@ -130,77 +161,82 @@ const FormBuilder = () => {
   };
 
   return (
-    <Stack mt={"2px"}>
+    <Stack sx={{ width: "100%", height: "100%", flex: 1, overflow: "hidden" }}>
       <Box sx={{ padding: "20px", width: "100%", backgroundColor: "#ddeefe" }}>
         <SegmentedControl
           onClick={(value) => console.log("formbuilder : ", { value })}
         />
       </Box>
-      <SectionContainer>
-        {() => {
-          return sections.map((singleSection, sectionIdx) => {
-            const { id, rows } = singleSection || {};
-            // console.log("single section : ", { id, rows, sectionIdx });
-            return (
-              <Stack
-                key={id}
-                gap={2}
-                sx={{ maxWidth: "1200px", margin: "0 auto" }}
-              >
-                {rows.map((singleRow, rowIdx) => {
-                  // console.log("singleRow : ", { singleRow, rowIdx });
-                  const { id, components } = singleRow || {};
-                  const isFirstRowOfSection = rowIdx === 0;
-                  const isLastRowOfSection = rowIdx === rows.length - 1;
-                  return (
-                    <RowContainer
-                      key={id}
-                      sectionIdx={sectionIdx}
-                      rowIdx={rowIdx}
-                      rowId={id}
-                      isFirstRowOfSection={isFirstRowOfSection}
-                      isLastRowOfSection={isLastRowOfSection}
-                    >
-                      {() => {
-                        return components.map((singleRowComponent, columnIdx) =>
-                          renderColumnComponent({
-                            sectionIdx,
-                            rowIdx,
-                            columnIdx,
-                            singleRowComponent,
+      <Stack sx={{ width: "100%", height: "100%", flex: 1, overflow: "auto" }}>
+        <SectionContainer>
+          {() => {
+            return sections.map((singleSection, sectionIdx) => {
+              const { id, rows } = singleSection || {};
+              // console.log("single section : ", { id, rows, sectionIdx });
+              return (
+                <Stack
+                  key={id}
+                  gap={2}
+                  sx={{ maxWidth: "1200px", margin: "0 auto" }}
+                >
+                  {rows.map((singleRow, rowIdx) => {
+                    // console.log("singleRow : ", { singleRow, rowIdx });
+                    const { id, components } = singleRow || {};
+                    const isFirstRowOfSection = rowIdx === 0;
+                    const isLastRowOfSection = rowIdx === rows.length - 1;
+                    return (
+                      <RowContainer
+                        key={id}
+                        sectionIdx={sectionIdx}
+                        rowIdx={rowIdx}
+                        rowId={id}
+                        isFirstRowOfSection={isFirstRowOfSection}
+                        isLastRowOfSection={isLastRowOfSection}
+                      >
+                        {() => {
+                          return components.map(
+                            (singleRowComponent, columnIdx) =>
+                              renderColumnComponent({
+                                sectionIdx,
+                                rowIdx,
+                                columnIdx,
+                                singleRowComponent,
+                              })
+                          );
+                        }}
+                      </RowContainer>
+                    );
+                  })}
+
+                  {rows.length === 0 ? (
+                    <AddNewRowOrElement
+                      onClick={() => {
+                        dispatch(
+                          toggleColumnDrawer({
+                            open: true,
+                            layoutAttributes: { sectionIdx },
                           })
                         );
-                      }}
-                    </RowContainer>
-                  );
-                })}
-
-                {rows.length === 0 ? (
-                  <AddNewRowOrElement
-                    onClick={() => {
-                      dispatch(
-                        toggleColumnDrawer({
-                          open: true,
-                          layoutAttributes: { sectionIdx },
-                        })
-                      );
-                      /*
+                        /*
                   open drawer and select columns layout and then insert row
                   */
-                    }}
-                    buttonText="Add new Row"
-                    variant="row"
-                  />
-                ) : null}
-              </Stack>
-            );
-          });
+                      }}
+                      buttonText="Add new Row"
+                      variant="row"
+                    />
+                  ) : null}
+                </Stack>
+              );
+            });
 
-          // return <RowContainer></RowContainer>;
-        }}
-      </SectionContainer>
+            // return <RowContainer></RowContainer>;
+          }}
+        </SectionContainer>
+      </Stack>
+
       <ElementsDrawer open={showElementsDrawer} />
       <ColumnLayoutDrawer open={showColumnDrawer} />
+      <ElementSettingDrawer open={showEditElementsDrawer} />
     </Stack>
   );
 };

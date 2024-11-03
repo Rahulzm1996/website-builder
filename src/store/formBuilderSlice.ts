@@ -31,13 +31,6 @@ const formBuilderSlice = createSlice({
       state.elementsDrawerConfig.open = open;
       state.elementsDrawerConfig.elementAttributes = elementAttributes;
     },
-    // addColumnInRow: (state, { payload }) => {
-    //   // console.log("add more reducer called : ", { state, payload });
-    //   const { sectionIdx } = payload || {};
-    //   state.sections[sectionIdx].rows = state.sections[sectionIdx].rows.concat(
-    //     getEmptyRow(2)
-    //   );
-    // },
     addElement: (state, { payload }) => {
       const { sectionIdx, rowIdx, columnIdx, componentToBeAdded } =
         payload || {};
@@ -82,6 +75,13 @@ const formBuilderSlice = createSlice({
         (row) => row.id !== rowId
       );
     },
+    toggleEditElementDrawer: (state, { payload }) => {
+      // console.log("add new row reducer called : ", { state, payload });
+      const { open, editElementAttributes } = payload || {};
+      state.editElementDrawerConfig.open = open;
+      state.editElementDrawerConfig.editElementAttributes =
+        editElementAttributes;
+    },
   },
 });
 
@@ -89,12 +89,12 @@ export const {
   toggleColumnDrawer,
   addNewRow,
   addMoreRow,
-  // addColumnInRow,
   toggleAddElementsDrawer,
   addElement,
   moveSectionRow,
   cloneSectionRow,
   deleteSectionRow,
   cloneElement,
+  toggleEditElementDrawer,
 } = formBuilderSlice.actions;
 export default formBuilderSlice.reducer;

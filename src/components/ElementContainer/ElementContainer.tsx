@@ -9,24 +9,34 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { StyledElementContainer } from "./styles";
 import { useFormBuilderDispatch } from "../../store/store";
-import { cloneElement } from "../../store/formBuilderSlice";
+import {
+  cloneElement,
+  toggleEditElementDrawer,
+} from "../../store/formBuilderSlice";
 
 interface ElementContainerProps {
   sectionIdx: number;
   rowIdx: number;
   columnIdx: number;
   children: JSX.Element;
+  type?: string;
 }
 const ElementContainer = (props: ElementContainerProps) => {
   const dispatch = useFormBuilderDispatch();
   // const sections = useFormBuilderSelector(
   //   (state) => state.formBuilder.sections
   // );
-  const { sectionIdx, rowIdx, columnIdx, children } = props || {};
+  const { sectionIdx, rowIdx, columnIdx, type, children } = props || {};
 
   const handleElementSetting = () => {
-    console.log("handleElementSetting");
+    console.log("handleElementSetting", { sectionIdx, rowIdx, columnIdx });
     // dispatch(addMoreRow({ sectionIdx }));
+    dispatch(
+      toggleEditElementDrawer({
+        open: true,
+        editElementAttributes: { sectionIdx, rowIdx, columnIdx, type },
+      })
+    );
   };
 
   const handleCloneElement = () => {

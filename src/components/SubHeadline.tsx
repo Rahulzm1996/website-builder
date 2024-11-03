@@ -4,16 +4,16 @@ import { TypographyProps } from "@mui/material";
 
 interface SubHeadlineProps {
   text: string;
-  css?: React.CSSProperties;
+  styles?: React.CSSProperties;
   variant: TypographyProps["variant"];
 }
 
 const SubHeadline = (props: SubHeadlineProps) => {
-  const { text, variant = "subtitle1", css } = props;
+  const { text, variant = "subtitle1", styles } = props;
 
   return (
     <Stack>
-      <Typography variant={variant} sx={{ ...css }}>
+      <Typography variant={variant} sx={{ ...styles }}>
         {text ?? "Sub heading text"}
       </Typography>
     </Stack>

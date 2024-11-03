@@ -3,7 +3,7 @@ import { ElementContainer } from "./ElementContainer";
 import { Stack } from "@mui/material";
 
 const DynamicElementContainer = ({ component: Component, ...props }) => {
-  const { sectionIdx, rowIdx, columnIdx } = props;
+  const { sectionIdx, rowIdx, columnIdx, type } = props;
 
   return (
     <ElementContainer
@@ -11,6 +11,7 @@ const DynamicElementContainer = ({ component: Component, ...props }) => {
       sectionIdx={sectionIdx}
       rowIdx={rowIdx}
       columnIdx={columnIdx}
+      type={type}
     >
       <Stack>
         {/* <Stack className="column"> */}
