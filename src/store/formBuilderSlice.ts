@@ -7,18 +7,31 @@ const formBuilderSlice = createSlice({
   name: "formBuilder",
   initialState: initialState,
   reducers: {
+    toggleColumnDrawer: (state, { payload }) => {
+      // console.log("add new row reducer called : ", { state, payload });
+      const { open, layoutAttributes } = payload || {};
+      state.columnsDrawerConfig.open = open;
+      state.columnsDrawerConfig.layoutAttributes = layoutAttributes;
+    },
     addNewRow: (state, { payload }) => {
       // console.log("add new row reducer called : ", { state, payload });
-      const { sectionIdx } = payload || {};
-      state.sections[sectionIdx].rows = getEmptyRow(3);
+      const { sectionIdx, numberOfColumns } = payload || {};
+      state.sections[sectionIdx].rows = getEmptyRow(numberOfColumns);
     },
     addMoreRow: (state, { payload }) => {
       // console.log("add more reducer called : ", { state, payload });
-      const { sectionIdx } = payload || {};
+      const { sectionIdx, numberOfColumns } = payload || {};
       state.sections[sectionIdx].rows = state.sections[sectionIdx].rows.concat(
-        getEmptyRow(2)
+        getEmptyRow(numberOfColumns)
       );
     },
+    // addColumnInRow: (state, { payload }) => {
+    //   // console.log("add more reducer called : ", { state, payload });
+    //   const { sectionIdx } = payload || {};
+    //   state.sections[sectionIdx].rows = state.sections[sectionIdx].rows.concat(
+    //     getEmptyRow(2)
+    //   );
+    // },
     addElement: (state, { payload }) => {
       const { sectionIdx, rowIdx, columnIdx, componentType } = payload || {};
       //type and props will come from outside
@@ -71,8 +84,10 @@ const formBuilderSlice = createSlice({
 });
 
 export const {
+  toggleColumnDrawer,
   addNewRow,
   addMoreRow,
+  // addColumnInRow,
   addElement,
   moveSectionRow,
   cloneSectionRow,

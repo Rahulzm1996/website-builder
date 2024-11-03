@@ -37,6 +37,15 @@ export const initialState: StoreState = {
       rows: [],
     },
   ],
+  columnsDrawerConfig: {
+    open: false,
+    layoutAttributes: {
+      mode: "new",
+      sectionIdx: 0,
+      rowIdx: 0,
+      columnIdx: 0,
+    },
+  },
 };
 
 const section = [

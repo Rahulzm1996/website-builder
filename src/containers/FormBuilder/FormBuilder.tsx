@@ -2,7 +2,7 @@ import React from "react";
 import { SectionContainer } from "../../components/SectionContainer";
 import { RowContainer } from "../../components/RowContainer";
 import { ElementsDrawer } from "../ElementsDrawer";
-import { ColumnLayoutSidebar } from "../ColumnLayoutSidebar";
+import { ColumnLayoutDrawer } from "../ColumnLayoutDrawer";
 import { useSelector } from "react-redux";
 import { ComponentTypes, ComponentTypesMap, StoreState } from "../../contants";
 import {
@@ -10,7 +10,11 @@ import {
   useFormBuilderSelector,
 } from "../../store/store";
 import Stack from "@mui/material/Stack";
-import { addElement, addNewRow } from "../../store/formBuilderSlice";
+import {
+  addElement,
+  addNewRow,
+  toggleColumnDrawer,
+} from "../../store/formBuilderSlice";
 import Box from "@mui/material/Box";
 import {
   AddNewRowOrElement,
@@ -20,6 +24,7 @@ import {
   SubHeadline,
 } from "../../components";
 import { ComponentProperties } from "../../types";
+import { SegmentedControl } from "../../components/SegmentedControl";
 
 interface RenderColumnComponent {
   sectionIdx: number;
@@ -30,11 +35,13 @@ interface RenderColumnComponent {
 
 const FormBuilder = () => {
   const dispatch = useFormBuilderDispatch();
-  const sections = useFormBuilderSelector(
-    (state) => state.formBuilder.sections
+  const { sections, columnsDrawerConfig } = useFormBuilderSelector(
+    (state) => state.formBuilder
   );
+  const { open: showColumnDrawer, layoutAttributes } =
+    columnsDrawerConfig || {};
 
-  // console.log("sections ", { sections });
+  console.log("sections ", { sections, columnsDrawerConfig });
 
   const handleAddNewElement = ({
     sectionIdx,
@@ -103,6 +110,11 @@ const FormBuilder = () => {
 
   return (
     <Stack mt={"2px"}>
+      <Box sx={{ padding: "20px", width: "100%", backgroundColor: "#ddeefe" }}>
+        <SegmentedControl
+          onClick={(value) => console.log("formbuilder : ", { value })}
+        />
+      </Box>
       <SectionContainer>
         {() => {
           return sections.map((singleSection, sectionIdx) => {
@@ -145,7 +157,12 @@ const FormBuilder = () => {
                 {rows.length === 0 ? (
                   <AddNewRowOrElement
                     onClick={() => {
-                      dispatch(addNewRow({ sectionIdx }));
+                      dispatch(
+                        toggleColumnDrawer({
+                          open: true,
+                          layoutAttributes: { sectionIdx },
+                        })
+                      );
                       /*
                   open drawer and select columns layout and then insert row
                   */
@@ -161,8 +178,8 @@ const FormBuilder = () => {
           // return <RowContainer></RowContainer>;
         }}
       </SectionContainer>
-      {/* <ElementsDrawer open={false} />
-      <ColumnLayoutSidebar open={false} onClose={undefined} /> */}
+      {/* <ElementsDrawer open={false} /> */}
+      <ColumnLayoutDrawer open={showColumnDrawer} onClose={undefined} />
     </Stack>
   );
 };

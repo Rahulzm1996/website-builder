@@ -37,7 +37,6 @@ import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import LayersIcon from "@mui/icons-material/Layers";
 import PreviewIcon from "@mui/icons-material/Visibility";
 import SaveIcon from "@mui/icons-material/Save";
-import SegmentedControl from "./SegmentedControl";
 import { Fullscreen, ViewList, ViewModule, Code } from "@mui/icons-material";
 
 const Navbar = styled(AppBar)(({ theme }) => ({
@@ -144,9 +143,6 @@ const NavbarComponent = () => {
             <AccountCircleIcon />
           </IconButton>
         </IconGroup>
-
-        <SegmentedControl />
-        {/* <SegmentedControl value={2} tabsConfig={tabsConfig} /> */}
       </ToolbarContainer>
     </Navbar>
   );

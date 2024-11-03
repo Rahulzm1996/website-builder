@@ -14,9 +14,19 @@ export interface EmptyRow {
   isPinned?: boolean;
 }
 
+type LayoutAttributes = {
+  sectionIdx?: number;
+  mode: "new" | "existing";
+};
+
 export interface StoreState {
   sections: {
     id: string;
     rows: EmptyRow[];
   }[];
+  columnsDrawerConfig: {
+    open: boolean;
+
+    layoutAttributes: LayoutAttributes;
+  };
 }

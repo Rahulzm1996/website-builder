@@ -82,7 +82,7 @@ const ElementsDrawer = ({ open, onClose }: DrawerProps) => {
 
   return (
     <SidebarDrawer
-      open={open}
+      open={false}
       onClose={onClose}
       variant="permanent"
       anchor="right"

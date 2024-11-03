@@ -20,6 +20,7 @@ import {
   cloneSectionRow,
   deleteSectionRow,
   moveSectionRow,
+  toggleColumnDrawer,
 } from "../../store/formBuilderSlice";
 
 interface RowContainerProps {
@@ -44,7 +45,13 @@ const RowContainer = (props: RowContainerProps) => {
     children,
   } = props || {};
   const handleAddMoreRow = () => {
-    dispatch(addMoreRow({ sectionIdx }));
+    // dispatch(addMoreRow({ sectionIdx }));
+    dispatch(
+      toggleColumnDrawer({
+        open: true,
+        layoutAttributes: { sectionIdx, mode: "existing" },
+      })
+    );
   };
 
   const handleMoveRow = ({ direction }: { direction: "up" | "down" }) => {
