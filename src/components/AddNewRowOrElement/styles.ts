@@ -19,8 +19,6 @@ export const AddNewRowPlaceholderStyles = styled(Box)<{
   cursor: pointer;
 
   .btn {
-    font-family: Roboto, system, -apple-system, BlinkMacSystemFont,
-      ".SFNSDisplay-Regular", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
     color: #fff;
