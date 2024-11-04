@@ -19,7 +19,7 @@ interface SegmentedControlProps {
     menuOptions?: string[];
     tooltip?: {
       title: string;
-      position: TooltipProps["placement"];
+      position: string;
     };
   }>;
   onClick: (value: string | undefined) => void;
@@ -55,6 +55,7 @@ const StyledTabs = styled(Tabs)({
 });
 
 const StyledTab = styled(Tab)(() => ({
+  minWidth: "unset",
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "flex-start",
@@ -80,59 +81,13 @@ const StyledTab = styled(Tab)(() => ({
 
   "& .MuiSvgIcon-root": {
     marginBottom: "unset",
-    marginRight: "10px",
     width: "21px",
     height: "21px",
   },
 }));
 
-const tabsConfig1 = [
-  {
-    label: "Sections",
-    value: "sections",
-    icon: <CropFreeIcon />,
-    type: "normal",
-    tooltip: {
-      title: "Sections",
-      position: "top",
-    },
-  },
-  {
-    label: "Rows",
-    value: "rows",
-    icon: <MenuIcon />,
-    type: "menu",
-    menuOptions: ["Add Row", "Manage"],
-    tooltip: {
-      title: "Rows",
-      position: "top",
-    },
-  },
-  {
-    label: "Columns",
-    value: "columns",
-    icon: <ViewColumnIcon />,
-    type: "menu",
-    menuOptions: ["Add Column", "Manage"],
-    tooltip: {
-      title: "Columns",
-      position: "top",
-    },
-  },
-  {
-    label: "Elements",
-    value: "elements",
-    icon: <CodeIcon />,
-    type: "normal",
-    tooltip: {
-      title: "Elements",
-      position: "top",
-    },
-  },
-];
-
 const SegmentedControl = ({
-  tabsConfig = tabsConfig1,
+  tabsConfig = [],
   onClick,
 }: SegmentedControlProps) => {
   const [tabValue, setTabValue] = useState(null);
@@ -174,6 +129,9 @@ const SegmentedControl = ({
       >
         {tabsConfig.map((tab, index) => {
           const { label, icon, tooltip, type, value } = tab || {};
+          const wrappedLabel = (
+            <span style={{ marginLeft: "10px" }}>{label}</span>
+          );
           return type === "normal" ? (
             <Tooltip
               title={tooltip?.title}
@@ -184,8 +142,7 @@ const SegmentedControl = ({
                 key={label}
                 value={value}
                 {...(icon ? { icon: icon } : {})}
-                {...(label ? { label: label } : {})}
-                // onClick={(event) => handleTabChange(event, value)}
+                {...(label ? { label: wrappedLabel } : {})}
               />
             </Tooltip>
           ) : (
@@ -198,7 +155,7 @@ const SegmentedControl = ({
                 key={label}
                 value={value}
                 {...(icon ? { icon: icon } : {})}
-                {...(label ? { label: label } : {})}
+                {...(label ? { label: wrappedLabel } : {})}
                 onClick={(event) => handleMenuOpen(event, value)}
               />
             </Tooltip>

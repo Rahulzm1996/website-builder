@@ -4,7 +4,16 @@ import { RowContainer } from "../../components/RowContainer";
 import { ElementsDrawer } from "../ElementsDrawer";
 import { ColumnLayoutDrawer } from "../ColumnLayoutDrawer";
 import { useSelector } from "react-redux";
-import { ComponentTypes, ComponentTypesMap, StoreState } from "../../contants";
+import {
+  ComponentTypes,
+  ComponentTypesMap,
+  editorControls,
+  NavBackButtonConfig,
+  previewControls,
+  settingsControls,
+  StoreState,
+  viewSwitcher,
+} from "../../contants";
 import {
   useFormBuilderDispatch,
   useFormBuilderSelector,
@@ -31,6 +40,7 @@ import { ComponentProperties } from "../../types";
 import { SegmentedControl } from "../../components/SegmentedControl";
 import { Grid, Grid2 } from "@mui/material";
 import { ElementSettingDrawer } from "../ElementSettingDrawer";
+import Controls from "./Controls";
 
 interface RenderColumnComponent {
   sectionIdx: number;
@@ -175,11 +185,7 @@ const FormBuilder = () => {
 
   return (
     <Stack sx={{ width: "100%", height: "100%", flex: 1, overflow: "hidden" }}>
-      <Box sx={{ padding: "20px", width: "100%", backgroundColor: "#ddeefe" }}>
-        <SegmentedControl
-          onClick={(value) => console.log("formbuilder : ", { value })}
-        />
-      </Box>
+      <Controls />
       <Stack sx={{ width: "100%", height: "100%", flex: 1, overflow: "auto" }}>
         <SectionContainer>
           {() => {

@@ -14,6 +14,14 @@ import CropFreeIcon from "@mui/icons-material/CropFree";
 import MenuIcon from "@mui/icons-material/Menu";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import CodeIcon from "@mui/icons-material/Code";
+import PersonalVideoIcon from "@mui/icons-material/PersonalVideo";
+import MobileScreenShareOutlinedIcon from "@mui/icons-material/MobileScreenShareOutlined";
+import PowerOutlinedIcon from "@mui/icons-material/PowerOutlined";
+import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
+import OpenInNewOutlinedIcon from "@mui/icons-material/OpenInNewOutlined";
+import ReplayOutlinedIcon from "@mui/icons-material/ReplayOutlined";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const row = [
@@ -451,47 +459,46 @@ export const DRAWER_ELEMENTS = [
   },
   {
     category: "Form",
-    label: "FORM INPUT",
+    label: "BUTTON",
     icon: "📋",
     type: ComponentTypes.HEADLINE,
     disable: true,
   },
   {
     category: "Form",
-    label: "FORM INPUT",
+    label: "FACEBOOK OPTION",
     icon: "📋",
     type: ComponentTypes.FORM,
     disable: true,
   },
   {
     category: "Form",
-    label: "FORM INPUT",
+    label: "INPUT",
     icon: "📋",
     type: ComponentTypes.INPUT,
     disable: true,
   },
   {
     category: "Form",
-    label: "FORM INPUT",
+    label: "TEXT AREA",
     icon: "📋",
     type: ComponentTypes.TEXTAREA,
     disable: true,
   },
   {
     category: "Form",
-    label: "FORM INPUT",
+    label: "CHECKBOX HEADLINE",
     icon: "📋",
     type: ComponentTypes.SELECT,
     disable: true,
   },
   {
     category: "Form",
-    label: "FORM INPUT",
+    label: "SELECT BOX",
     icon: "📋",
     type: ComponentTypes.CHECKBOX,
     disable: true,
   },
-  // Advance Form
   {
     category: "Advance Form",
     label: "SMS SIGN UP",
@@ -522,7 +529,96 @@ export const DRAWER_ELEMENTS = [
   },
 ];
 
-export const tabsConfig1 = [
+export const NavBackButtonConfig = [
+  {
+    label: "",
+    value: "back",
+    icon: <ArrowBackIcon />,
+    type: "normal",
+    tooltip: {
+      title: "Back",
+      position: "top",
+    },
+  },
+];
+
+export const viewSwitcher = [
+  {
+    label: "Desktop",
+    value: "desktop",
+    icon: <PersonalVideoIcon />,
+    type: "normal",
+    tooltip: {
+      title: "Desktop",
+      position: "top",
+    },
+  },
+  {
+    label: "Mobile",
+    value: "mobile",
+    icon: <MobileScreenShareOutlinedIcon />,
+    type: "normal",
+    tooltip: {
+      title: "Mobile",
+      position: "top",
+    },
+  },
+];
+
+export const settingsControls = [
+  {
+    label: "",
+    value: "app",
+    icon: <PowerOutlinedIcon />,
+    type: "normal",
+    tooltip: {
+      title: "App",
+      position: "top",
+    },
+  },
+  {
+    label: "settings",
+    value: "settings",
+    icon: <SettingsSuggestOutlinedIcon />,
+    type: "normal",
+    tooltip: {
+      title: "Settings",
+      position: "top",
+    },
+  },
+  {
+    label: "Pop up",
+    value: "pop up",
+    icon: <OpenInNewOutlinedIcon />,
+    type: "normal",
+    tooltip: {
+      title: "Pop up",
+      position: "top",
+    },
+  },
+  {
+    label: "",
+    value: "undo",
+    icon: <ReplayOutlinedIcon />,
+    type: "normal",
+    tooltip: {
+      title: "Undo",
+      position: "top",
+    },
+  },
+  {
+    label: "",
+    value: "redo",
+    icon: <ReplayOutlinedIcon sx={{ transform: "rotateY(180deg)" }} />,
+    type: "normal",
+    tooltip: {
+      title: "Redo",
+      position: "top",
+    },
+  },
+];
+
+export const editorControls = [
   {
     label: "Sections",
     value: "sections",
@@ -562,6 +658,29 @@ export const tabsConfig1 = [
     type: "normal",
     tooltip: {
       title: "Elements",
+      position: "top",
+    },
+  },
+];
+
+export const previewControls = [
+  {
+    label: "Preview",
+    value: "preview",
+    icon: <RemoveRedEyeIcon />,
+    type: "normal",
+    tooltip: {
+      title: "Preview",
+      position: "top",
+    },
+  },
+  {
+    label: "Save",
+    value: "pave",
+    icon: <SaveOutlinedIcon />,
+    type: "normal",
+    tooltip: {
+      title: "Save",
       position: "top",
     },
   },
