@@ -10,7 +10,7 @@ const Container = styled("div")({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "16px",
+  // padding: "16px",
   width: "100%",
 });
 

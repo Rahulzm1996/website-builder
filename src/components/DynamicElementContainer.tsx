@@ -13,10 +13,10 @@ const DynamicElementContainer = ({ component: Component, ...props }) => {
       columnIdx={columnIdx}
       type={type}
     >
-      <Stack>
-        {/* <Stack className="column"> */}
-        <Component {...props} />
-      </Stack>
+      {/* <Stack>
+        <Stack className="column">
+      </Stack> */}
+      <Component {...props} />
     </ElementContainer>
   );
 };

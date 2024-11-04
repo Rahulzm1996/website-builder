@@ -58,21 +58,6 @@ const SectionContainer = ({ children }) => {
           </Stack>
         </Tooltip>
       </Stack>
-      {/* <AddNewRowAndElementPlaceholder
-        onClick={() => {
-          console.log("add New section clicked");
-        }}
-        buttonText="Add new Row"
-        variant="row"
-      />
-      <AddNewRowAndElementPlaceholder
-        onClick={() => {
-          console.log("add New Element clicked");
-        }}
-        buttonText="Add new Element"
-        variant="element"
-      /> */}
-
       {children()}
     </StyledSectionContainer>
   );

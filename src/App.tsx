@@ -7,12 +7,17 @@ import { Stack } from "@mui/material";
 
 function App() {
   return (
-    <Provider store={store}>
-      <Navbar />
+    <Stack
+      sx={{
+        height: "100vh",
+      }}
+    >
+      <Provider store={store}>
+        <Navbar />
 
-      <FormBuilder />
-      {/* <ResponsiveGrid /> */}
-    </Provider>
+        <FormBuilder />
+      </Provider>
+    </Stack>
   );
 }
 

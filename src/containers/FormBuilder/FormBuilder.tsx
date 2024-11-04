@@ -88,13 +88,14 @@ const FormBuilder = () => {
     switch (type) {
       case ComponentTypes.EMPTY_ELEMENT: {
         return (
-          <Grid
-            item
-            xs={12} // 100% width on extra-small screens (1 item per row)
-            sm={6} // 50% width on small screens (2 items per row)
-            md={4} // 33.33% width on medium screens (3 items per row)
-            lg={3} // 25% width on large screens (4 items per row)
-            xl={2} // 20% width on extra-large screens (5 items per row)
+          <Box
+            sx={{ display: "flex", flexBasis: "200px", flex: 1 }}
+            // item
+            // xs={12} // 100% width on extra-small screens (1 item per row)
+            // sm={6} // 50% width on small screens (2 items per row)
+            // md={4} // 33.33% width on medium screens (3 items per row)
+            // lg={3} // 25% width on large screens (4 items per row)
+            // xl={2} // 20% width on extra-large screens (5 items per row)
             // sx={{
             //   // flexBasis: "200px", // Minimum width of 200px
             //   flexGrow: 1, // Allow items to grow to fill space
@@ -115,7 +116,7 @@ const FormBuilder = () => {
               buttonText="Add new Element"
               variant="element"
             />
-          </Grid>
+          </Box>
         );
       }
       case ComponentTypes.HEADLINE: {

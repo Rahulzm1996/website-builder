@@ -67,7 +67,7 @@ const RowContainer = (props: RowContainerProps) => {
   };
 
   return (
-    <StyledRowContainer className="rowContainer" container spacing={2}>
+    <StyledRowContainer className="rowContainer">
       <Box className="rowCreatorActions">
         <Stack className="moveActions">
           {!isFirstRowOfSection ? (

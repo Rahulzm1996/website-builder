@@ -1,17 +1,22 @@
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import styled from "styled-components";
 
-export const StyledElementContainer = styled(Grid)`
+export const StyledElementContainer = styled(Box)`
   min-height: 104px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  flex-basis: 300px;
+  flex: 1;
   /* margin-right: -15px;
   margin-left: -15px; */
   /* max-width: 1200px;
   margin: 0 auto; */
-  margin: 16px;
-  transition: all 0.2s ease-in-out 0s;
+  padding: 8px;
+  transition: border 0.2s ease-in-out 0s;
   position: relative;
+  /* border-color: transparent; */
+  border: 2px solid transparent;
 
   .elementCreatorActions {
     opacity: 0;
@@ -52,6 +57,7 @@ export const StyledElementContainer = styled(Grid)`
   }
 
   &:hover {
+    /* outline: 2px solid #ff7402; */
     border: 2px solid #ff7402;
     .elementCreatorActions {
       opacity: 1;
