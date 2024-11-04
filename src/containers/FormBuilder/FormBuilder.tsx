@@ -24,6 +24,7 @@ import {
   DynamicElementContainer,
   ElementContainer,
   Headline,
+  Paragraph,
   SubHeadline,
 } from "../../components";
 import { ComponentProperties } from "../../types";
@@ -123,6 +124,18 @@ const FormBuilder = () => {
         return (
           <DynamicElementContainer
             component={SubHeadline}
+            sectionIdx={sectionIdx}
+            rowIdx={rowIdx}
+            columnIdx={columnIdx}
+            type={type}
+            {...props}
+          />
+        );
+      }
+      case ComponentTypes.PARAGRAPH: {
+        return (
+          <DynamicElementContainer
+            component={Paragraph}
             sectionIdx={sectionIdx}
             rowIdx={rowIdx}
             columnIdx={columnIdx}

@@ -9,6 +9,8 @@ export interface ComponentProperties {
     styles?: React.CSSProperties;
     src?: string;
     alt?: string;
+    items?: string[];
+    ordered?: boolean;
   };
 }
 

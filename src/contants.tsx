@@ -351,6 +351,7 @@ export const componentDefaultPropsMap = {
     // type: "onFiled" | "drawer";
     fieldProps: {
       text: "Sub heading text...",
+      styles: {},
       // placeholder: "",
       // defaultValue: "",
     },
@@ -358,7 +359,8 @@ export const componentDefaultPropsMap = {
   [ComponentTypes.PARAGRAPH]: {
     // type: "onFiled" | "drawer";
     fieldProps: {
-      text: "Sub heading text",
+      text: "Paragraph text",
+      styles: {},
       // placeholder: "",
       // defaultValue: "",
     },
@@ -367,6 +369,7 @@ export const componentDefaultPropsMap = {
     // type: "onFiled" | "drawer";
     fieldProps: {
       items: ["Item 1", "Item 2", "Item 3"],
+      styles: {},
     },
   },
   [ComponentTypes.IMAGE]: {

@@ -33,6 +33,8 @@ import {
 import { HeadlineEditor } from "../../components/Headline";
 import { ComponentProperties } from "../../types";
 import { ImageEditor } from "../../components/CustomImage";
+import { CustomListEditor } from "../../components";
+import { ParagraphEditor } from "../../components/Paragraph";
 
 const drawerWidth = 400;
 
@@ -111,11 +113,20 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
   };
 
   const getComponentEditors = (type: ComponentProperties["type"]) => {
+    console.log("getComponentEditors :::", { type });
     switch (type) {
-      case ComponentTypes.SUB_HEADLINE:
-      case ComponentTypes.HEADLINE: {
+      case ComponentTypes.HEADLINE:
+      case ComponentTypes.SUB_HEADLINE: {
         return (
           <HeadlineEditor
+            existingComponentProps={existingComponentConfig?.props || {}}
+            updateElementInColumn={updateElementInColumn}
+          />
+        );
+      }
+      case ComponentTypes.PARAGRAPH: {
+        return (
+          <ParagraphEditor
             existingComponentProps={existingComponentConfig?.props || {}}
             updateElementInColumn={updateElementInColumn}
           />
@@ -131,7 +142,7 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
       }
       case ComponentTypes.LIST: {
         return (
-          <HeadlineEditor
+          <CustomListEditor
             existingComponentProps={existingComponentConfig?.props || {}}
             updateElementInColumn={updateElementInColumn}
           />
@@ -139,7 +150,7 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
       }
 
       default:
-        break;
+        return null;
     }
   };
 

@@ -4,4 +4,5 @@ export { Headline } from "./Headline";
 export { default as SubHeadline } from "./SubHeadline";
 export { default as DynamicElementContainer } from "./DynamicElementContainer";
 export { CustomImage } from "./CustomImage";
-export { default as CustomList } from "./CustomList";
+export { CustomList, CustomListEditor } from "./CustomList";
+export { Paragraph } from "./Paragraph";
