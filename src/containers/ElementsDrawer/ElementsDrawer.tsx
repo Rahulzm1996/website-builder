@@ -48,6 +48,7 @@ const ElementsDrawer = ({ open }: ElementsDrawerProps) => {
   const categories = [...new Set(filteredItems.map((item) => item.category))];
 
   const closeDrawer = () => {
+    setSearchTerm("");
     dispatch(toggleAddElementsDrawer({ open: false, elementAttributes: {} }));
   };
 
