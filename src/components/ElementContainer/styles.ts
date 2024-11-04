@@ -6,8 +6,7 @@ export const StyledElementContainer = styled(Box)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  flex-basis: 300px;
-  flex: 1;
+  flex: 1 1 250px;
   padding: 8px;
   transition: border 0.2s ease-in-out 0s;
   position: relative;

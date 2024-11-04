@@ -34,16 +34,16 @@ const ElementContainer = (props: ElementContainerProps) => {
     );
   };
 
-  const handleCloneElement = () => {
-    dispatch(cloneElement({ sectionIdx, rowIdx }));
-  };
+  // const handleCloneElement = () => {
+  //   dispatch(cloneElement({ sectionIdx, rowIdx }));
+  // };
 
-  const handleDeleteElement = () => {
-    console.log("handleDeleteElement");
-  };
-  const handleAddNewElement = () => {
-    console.log("handleAddNewElement");
-  };
+  // const handleDeleteElement = () => {
+  //   console.log("handleDeleteElement");
+  // };
+  // const handleAddNewElement = () => {
+  //   console.log("handleAddNewElement");
+  // };
 
   return (
     <StyledElementContainer>
@@ -59,7 +59,7 @@ const ElementContainer = (props: ElementContainerProps) => {
               <SettingsOutlinedIcon className="icon" />
             </Stack>
           </Tooltip>
-          <Tooltip title="Clone" placement="top" arrow>
+          {/* <Tooltip title="Clone" placement="top" arrow>
             <Stack className="iconWrapper" onClick={handleCloneElement}>
               <RemoveRedEyeOutlinedIcon className="icon" />
             </Stack>
@@ -73,16 +73,16 @@ const ElementContainer = (props: ElementContainerProps) => {
             <Stack className="iconWrapper" onClick={handleDeleteElement}>
               <DeleteOutlineOutlinedIcon className="icon" />
             </Stack>
-          </Tooltip>
+          </Tooltip> */}
         </Stack>
       </Box>
-      <Stack className="addNewElement">
+      {/* <Stack className="addNewElement">
         <Tooltip title="Add New Element" placement="bottom" arrow>
           <Stack className="iconWrapper" onClick={handleAddNewElement}>
             <AddOutlinedIcon className="icon" />
           </Stack>
         </Tooltip>
-      </Stack>
+      </Stack> */}
 
       {children}
     </StyledElementContainer>

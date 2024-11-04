@@ -32,6 +32,7 @@ const FormBuilder = () => {
   const dispatch = useFormBuilderDispatch();
   const {
     sections,
+    viewMode,
     columnsDrawerConfig,
     elementsDrawerConfig,
     editElementDrawerConfig,
@@ -132,15 +133,24 @@ const FormBuilder = () => {
     }
   };
 
+  const isMobileView = viewMode === "mobile";
+
   return (
-    <FormBuilderStyles>
+    <FormBuilderStyles isMobileView={isMobileView}>
       <Controls />
       <Stack className="sectionWrapper">
-        <SectionContainer>
-          {() => {
-            return sections.map((singleSection, sectionIdx) => {
-              const { id, rows } = singleSection || {};
-              return (
+        {sections.map((singleSection, sectionIdx) => {
+          const { id, rows } = singleSection || {};
+          const isFirstSection = sectionIdx === 0;
+          const isLastSection = sectionIdx === sections.length - 1;
+          return (
+            <SectionContainer
+              sectionIdx={sectionIdx}
+              sectionId={id}
+              isFirstSection={isFirstSection}
+              isLastSection={isLastSection}
+            >
+              {() => (
                 <Stack key={id} gap={2} className="rowsWrapper">
                   {rows.map((singleRow, rowIdx) => {
                     const { id, components } = singleRow || {};
@@ -185,10 +195,10 @@ const FormBuilder = () => {
                     />
                   ) : null}
                 </Stack>
-              );
-            });
-          }}
-        </SectionContainer>
+              )}
+            </SectionContainer>
+          );
+        })}
       </Stack>
 
       <ElementsDrawer open={showElementsDrawer} />

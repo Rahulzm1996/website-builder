@@ -9,22 +9,73 @@ import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { StyledSectionContainer } from "./styles";
+import {
+  useFormBuilderDispatch,
+  useFormBuilderSelector,
+} from "../../store/store";
+import {
+  addMoreSection,
+  cloneSection,
+  deleteSection,
+  moveSection,
+} from "../../store/formBuilderSlice";
 
-const SectionContainer = ({ children }: { children: () => JSX.Element[] }) => {
+interface SectionContainerProps {
+  sectionIdx: number;
+  sectionId?: number | string;
+  isFirstSection?: boolean;
+  isLastSection?: boolean;
+  children: () => React.ReactNode;
+}
+
+const SectionContainer = (props: SectionContainerProps) => {
+  const dispatch = useFormBuilderDispatch();
+  const { sections } = useFormBuilderSelector((state) => state.formBuilder);
+  const { sectionIdx, sectionId, isFirstSection, isLastSection, children } =
+    props || {};
+
+  const totalsSections = sections.length;
+
+  const handleAddMoreSection = () => {
+    dispatch(addMoreSection({ sectionIdx }));
+  };
+
+  const handleMoveSection = ({ direction }: { direction: "up" | "down" }) => {
+    dispatch(moveSection({ sectionIdx, direction }));
+  };
+
+  const handleCloneSection = () => {
+    dispatch(cloneSection({ sectionIdx }));
+  };
+
+  const handleDeleteSection = () => {
+    dispatch(deleteSection({ sectionId }));
+  };
+
   return (
     <StyledSectionContainer className="sectionContainer">
       <Box className="creatorActions">
         <Stack className="moveActions">
-          <Tooltip title="Up" placement="right-start" arrow>
-            <Stack className="iconWrapper">
-              <ArrowUpwardOutlinedIcon className="icon" />
-            </Stack>
-          </Tooltip>
-          <Tooltip title="Down" placement="right-start" arrow>
-            <Stack className="iconWrapper">
-              <ArrowDownwardOutlinedIcon className="icon" />
-            </Stack>
-          </Tooltip>
+          {!isFirstSection ? (
+            <Tooltip title="Up" placement="right-start" arrow>
+              <Stack
+                className="iconWrapper"
+                onClick={() => handleMoveSection({ direction: "up" })}
+              >
+                <ArrowUpwardOutlinedIcon className="icon" />
+              </Stack>
+            </Tooltip>
+          ) : null}
+          {!isLastSection ? (
+            <Tooltip title="Down" placement="right-start" arrow>
+              <Stack
+                className="iconWrapper"
+                onClick={() => handleMoveSection({ direction: "down" })}
+              >
+                <ArrowDownwardOutlinedIcon className="icon" />
+              </Stack>
+            </Tooltip>
+          ) : null}
         </Stack>
         <Stack className="moreActions">
           <Tooltip title="Settings" placement="left" arrow>
@@ -33,7 +84,7 @@ const SectionContainer = ({ children }: { children: () => JSX.Element[] }) => {
             </Stack>
           </Tooltip>
           <Tooltip title="Clone" placement="left" arrow>
-            <Stack className="iconWrapper">
+            <Stack className="iconWrapper" onClick={handleCloneSection}>
               <RemoveRedEyeOutlinedIcon className="icon" />
             </Stack>
           </Tooltip>
@@ -43,19 +94,22 @@ const SectionContainer = ({ children }: { children: () => JSX.Element[] }) => {
             </Stack>
           </Tooltip>
           <Tooltip title="Delete" placement="left" arrow>
-            <Stack className="iconWrapper">
+            <Stack className="iconWrapper" onClick={handleDeleteSection}>
               <DeleteOutlineOutlinedIcon className="icon" />
             </Stack>
           </Tooltip>
         </Stack>
       </Box>
-      <Stack className="AddNewSection">
-        <Tooltip title="Add new Section" placement="bottom" arrow>
-          <Stack className="iconWrapper">
-            <AddOutlinedIcon className="icon" />
-          </Stack>
-        </Tooltip>
-      </Stack>
+
+      {totalsSections === 1 || isLastSection ? (
+        <Stack className="AddNewSection">
+          <Tooltip title="Add new Section" placement="bottom" arrow>
+            <Stack className="iconWrapper" onClick={handleAddMoreSection}>
+              <AddOutlinedIcon className="icon" />
+            </Stack>
+          </Tooltip>
+        </Stack>
+      ) : null}
       {children()}
     </StyledSectionContainer>
   );

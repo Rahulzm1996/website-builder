@@ -40,9 +40,11 @@ type EditElementAttributes = {
 
 export interface StoreState {
   sections: {
-    id: string;
+    id: number | string;
     rows: EmptyRow[];
   }[];
+  isPreviewMode?: boolean;
+  viewMode: "desktop" | "mobile";
   columnsDrawerConfig: {
     open: boolean;
     layoutAttributes: LayoutAttributes;

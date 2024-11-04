@@ -1,12 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { initialState } from "../contants";
-import { getEmptyRow, moveRow } from "../utils";
+import { getEmptyRow, getEmptySection, moveRow, moveSections } from "../utils";
 import { v4 as uuidv4 } from "uuid";
 
 const formBuilderSlice = createSlice({
   name: "formBuilder",
   initialState: initialState,
   reducers: {
+    initializeSections: (state, { payload }) => {
+      const { sections } = payload;
+      state.sections = sections;
+    },
     toggleColumnDrawer: (state, { payload }) => {
       const { open, layoutAttributes } = payload || {};
       state.columnsDrawerConfig.open = open;
@@ -76,10 +80,46 @@ const formBuilderSlice = createSlice({
       state.editElementDrawerConfig.editElementAttributes =
         editElementAttributes;
     },
+    togglePreviewMode: (state) => {
+      state.isPreviewMode = !state.isPreviewMode;
+    },
+    addMoreSection: (state, { payload }) => {
+      const { sectionIdx } = payload || {};
+      state.sections[sectionIdx + 1] = getEmptySection();
+    },
+    moveSection: (state, { payload }) => {
+      const { sectionIdx, direction } = payload || {};
+      const currentSections = state.sections;
+      state.sections = moveSections({
+        sections: currentSections,
+        sectionIdx,
+        direction,
+      });
+    },
+    cloneSection: (state, { payload }) => {
+      const { sectionIdx } = payload || {};
+      const sectionToBeCloned = state.sections[sectionIdx];
+      state.sections.splice(sectionIdx + 1, 0, {
+        ...sectionToBeCloned,
+        id: uuidv4(),
+      });
+    },
+    deleteSection: (state, { payload }) => {
+      const { sectionId } = payload || {};
+      const currentSectionRows = state.sections;
+      state.sections = currentSectionRows.filter(
+        (section) => section.id !== sectionId
+      );
+    },
+    updateViewMode: (state, { payload }) => {
+      const { mode } = payload || {};
+      state.viewMode = mode;
+    },
   },
 });
 
 export const {
+  initializeSections,
   toggleColumnDrawer,
   addNewRow,
   addMoreRow,
@@ -90,5 +130,11 @@ export const {
   deleteSectionRow,
   cloneElement,
   toggleEditElementDrawer,
+  togglePreviewMode,
+  addMoreSection,
+  moveSection,
+  cloneSection,
+  deleteSection,
+  updateViewMode,
 } = formBuilderSlice.actions;
 export default formBuilderSlice.reducer;

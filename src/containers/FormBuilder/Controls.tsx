@@ -7,41 +7,63 @@ import {
   editorControls,
   previewControls,
 } from "../../contants";
+import { ControlsStyles } from "./styles";
+import {
+  useFormBuilderDispatch,
+  useFormBuilderSelector,
+} from "../../store/store";
+import {
+  togglePreviewMode,
+  updateViewMode,
+} from "../../store/formBuilderSlice";
 
 const Controls = () => {
+  const dispatch = useFormBuilderDispatch();
+  const { sections } = useFormBuilderSelector((state) => state.formBuilder);
+
+  const handleViewSwitcher = (action: string | undefined) => {
+    dispatch(updateViewMode({ mode: action }));
+  };
+
+  const handlePreviewControls = (action: string | undefined) => {
+    if (action === "save") {
+      localStorage.setItem(
+        "sectionsFromLocalStorage",
+        JSON.stringify(sections)
+      );
+    } else if (action === "preview") {
+      dispatch(togglePreviewMode());
+    }
+  };
+
   return (
-    <Stack
-      sx={{
-        flexDirection: "row",
-        alignItems: "center",
-        flexWrap: "wrap",
-        gap: "16px",
-        padding: "20px",
-        width: "100%",
-        backgroundColor: "#ddeefe",
-      }}
-    >
-      <SegmentedControl
-        tabsConfig={NavBackButtonConfig}
-        onClick={(value) => console.log("NavBackButtonConfig : ", { value })}
-      />
-      <SegmentedControl
-        tabsConfig={viewSwitcher}
-        onClick={(value) => console.log("viewSwitcher : ", { value })}
-      />
-      <SegmentedControl
-        tabsConfig={settingsControls}
-        onClick={(value) => console.log("settingsControls : ", { value })}
-      />
-      <SegmentedControl
-        tabsConfig={editorControls}
-        onClick={(value) => console.log("editorControls : ", { value })}
-      />
-      <SegmentedControl
-        tabsConfig={previewControls}
-        onClick={(value) => console.log("previewControls : ", { value })}
-      />
-    </Stack>
+    <ControlsStyles className="ControlsStyles">
+      <Stack className="leftContainer">
+        <SegmentedControl
+          tabsConfig={NavBackButtonConfig}
+          onClick={(value) => console.log("NavBackButtonConfig : ", { value })}
+        />
+        <SegmentedControl
+          tabsConfig={viewSwitcher}
+          onClick={handleViewSwitcher}
+        />
+        <SegmentedControl
+          tabsConfig={settingsControls}
+          onClick={(value) => console.log("settingsControls : ", { value })}
+        />
+      </Stack>
+
+      <Stack className="rightContainer">
+        <SegmentedControl
+          tabsConfig={editorControls}
+          onClick={(value) => console.log("editorControls : ", { value })}
+        />
+        <SegmentedControl
+          tabsConfig={previewControls}
+          onClick={handlePreviewControls}
+        />
+      </Stack>
+    </ControlsStyles>
   );
 };
 
