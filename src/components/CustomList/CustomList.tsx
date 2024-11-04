@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 interface CustomListProps {
   items: string[];
@@ -7,6 +6,7 @@ interface CustomListProps {
   className?: string;
   styles?: React.CSSProperties;
 }
+
 const CustomList = ({
   items,
   ordered = false,

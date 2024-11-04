@@ -1,4 +1,3 @@
-import React from "react";
 import Box from "@mui/material/Box";
 import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined";
 import ArrowUpwardOutlinedIcon from "@mui/icons-material/ArrowUpwardOutlined";
@@ -10,9 +9,8 @@ import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { StyledSectionContainer } from "./styles";
-import { AddNewRowAndElementPlaceholder } from "../AddNewRowOrElement";
 
-const SectionContainer = ({ children }) => {
+const SectionContainer = ({ children }: { children: () => JSX.Element[] }) => {
   return (
     <StyledSectionContainer className="sectionContainer">
       <Box className="creatorActions">

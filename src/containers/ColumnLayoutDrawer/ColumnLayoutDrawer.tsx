@@ -1,15 +1,4 @@
-import React from "react";
-import {
-  Drawer,
-  Typography,
-  Box,
-  Grid,
-  Card,
-  CardContent,
-  IconButton,
-  Stack,
-} from "@mui/material";
-import { styled } from "@mui/system";
+import { Typography, Box, Grid, CardContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import {
@@ -21,42 +10,7 @@ import {
   addNewRow,
   toggleColumnDrawer,
 } from "../../store/formBuilderSlice";
-
-const drawerWidth = 400;
-
-const StyledColumnDrawer = styled(Drawer)(({ theme }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  "& .MuiDrawer-paper": {
-    width: drawerWidth,
-    boxSizing: "border-box",
-    backgroundColor: "white",
-  },
-  [theme.breakpoints.down("sm")]: {
-    maxWidth: "90%",
-  },
-}));
-
-const Header = styled(Stack)({
-  fontWeight: "bold",
-  textAlign: "center",
-  color: "#455a64",
-});
-
-const LayoutCard = styled(Card)({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  textAlign: "center",
-  borderRadius: "8px",
-  cursor: "pointer",
-  color: "#455a64",
-  boxShadow: "none",
-  border: "1px solid #cfd8dc",
-  "&:hover": {
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-  },
-});
+import { Header, LayoutCard, StyledColumnDrawer } from "./styles";
 
 const layoutOptions = [
   { label: "1 COLUMN", value: 1, disable: false },
@@ -96,7 +50,6 @@ const ColumnLayoutDrawer = ({ open }: ColumnLayoutDrawerProps) => {
     value: number;
     disable: boolean;
   }) => {
-    console.log("addColumnsInRow", { mode, layoutAttributes });
     if (!option.disable) {
       if (mode === "existing") {
         dispatch(
@@ -125,18 +78,13 @@ const ColumnLayoutDrawer = ({ open }: ColumnLayoutDrawerProps) => {
       onClose={onClose}
       variant="temporary"
     >
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ backgroundColor: "#f2f7fa", padding: "15px 20px" }}
-      >
-        <Header variant="h6">Add Row</Header>
+      <Box className="columnsDrawerHeader">
+        <Header>Add Row</Header>
         <IconButton onClick={closeDrawer}>
           <CloseIcon />
         </IconButton>
       </Box>
-      <Grid container spacing={2} marginTop={2} sx={{ padding: "16px" }}>
+      <Grid container spacing={2} sx={{ padding: "16px", marginTop: "16px" }}>
         {layoutOptions.map((option) => {
           const { label, disable } = option;
           return (
@@ -147,22 +95,10 @@ const ColumnLayoutDrawer = ({ open }: ColumnLayoutDrawerProps) => {
               key={label}
               onClick={() => addColumnsInRow(option)}
             >
-              <LayoutCard
-                sx={{
-                  border: "2px solid #f2f7fa",
-                  transition: "all 0.2s ease-in-out 0s",
-                  cursor: disable ? "not-allowed" : "pointer",
-
-                  ":hover": {
-                    transform: disable ? "none" : "rotate(5deg)",
-                    backgroundColor: "#f2f7fa",
-                    borderColor: "#e0ecf3",
-                  },
-                }}
-              >
+              <LayoutCard disable={disable}>
                 <CardContent>
                   <ViewColumnIcon fontSize="large" color="disabled" />
-                  <Typography variant="body2" style={{ marginTop: "8px" }}>
+                  <Typography variant="body2" sx={{ marginTop: "8px" }}>
                     {label}
                   </Typography>
                 </CardContent>

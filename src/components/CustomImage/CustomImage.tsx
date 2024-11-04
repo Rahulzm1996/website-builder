@@ -1,6 +1,5 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import React from "react";
-import { TypographyProps } from "@mui/material";
 
 interface ImageProps {
   src: string;

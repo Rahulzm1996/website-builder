@@ -1,4 +1,3 @@
-import React from "react";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import { Stack } from "@mui/material";
@@ -21,16 +20,12 @@ interface ElementContainerProps {
   children: JSX.Element;
   type?: string;
 }
+
 const ElementContainer = (props: ElementContainerProps) => {
   const dispatch = useFormBuilderDispatch();
-  // const sections = useFormBuilderSelector(
-  //   (state) => state.formBuilder.sections
-  // );
   const { sectionIdx, rowIdx, columnIdx, type, children } = props || {};
 
   const handleElementSetting = () => {
-    console.log("handleElementSetting", { sectionIdx, rowIdx, columnIdx });
-    // dispatch(addMoreRow({ sectionIdx }));
     dispatch(
       toggleEditElementDrawer({
         open: true,
@@ -40,17 +35,14 @@ const ElementContainer = (props: ElementContainerProps) => {
   };
 
   const handleCloneElement = () => {
-    console.log("handleCloneElement");
     dispatch(cloneElement({ sectionIdx, rowIdx }));
   };
 
   const handleDeleteElement = () => {
     console.log("handleDeleteElement");
-    // dispatch(deleteSectionRow({ sectionIdx, rowId }));
   };
   const handleAddNewElement = () => {
     console.log("handleAddNewElement");
-    // dispatch(deleteSectionRow({ sectionIdx, rowId }));
   };
 
   return (

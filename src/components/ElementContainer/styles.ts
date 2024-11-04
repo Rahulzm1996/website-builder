@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import styled from "styled-components";
 
 export const StyledElementContainer = styled(Box)`
@@ -8,19 +8,13 @@ export const StyledElementContainer = styled(Box)`
   justify-content: center;
   flex-basis: 300px;
   flex: 1;
-  /* margin-right: -15px;
-  margin-left: -15px; */
-  /* max-width: 1200px;
-  margin: 0 auto; */
   padding: 8px;
   transition: border 0.2s ease-in-out 0s;
   position: relative;
-  /* border-color: transparent; */
   border: 2px solid transparent;
 
   .elementCreatorActions {
     opacity: 0;
-    /* transition: all 0.2s ease-in-out 0s; */
 
     .moreElementActions {
       display: flex;
@@ -36,7 +30,6 @@ export const StyledElementContainer = styled(Box)`
         width: 25px;
         height: 25px;
         background-color: #ff7402;
-        /* transition: all 0.2s ease-in-out 0s; */
         cursor: pointer;
 
         &:hover {
@@ -50,22 +43,18 @@ export const StyledElementContainer = styled(Box)`
         width: 16px;
         height: 16px;
         color: #fff;
-        /* transition: all 0.2s ease-in-out 0s; */
         font-size: 0.75rem;
       }
     }
   }
 
   &:hover {
-    /* outline: 2px solid #ff7402; */
     border: 2px solid #ff7402;
     .elementCreatorActions {
       opacity: 1;
-      /* transition: all 0.2s ease-in-out 0s; */
     }
     .addNewElement {
       opacity: 1;
-      /* transition: all 0.2s ease-in-out 0s; */
     }
   }
 
@@ -80,7 +69,7 @@ export const StyledElementContainer = styled(Box)`
     color: #fff;
     font-size: 12px;
     cursor: pointer;
-    /* transition: all 0.2s ease-in-out 0s; */
+    transition: all 0.2s ease-in-out 0s;
     position: absolute;
     margin: auto;
     left: 0;
@@ -95,7 +84,7 @@ export const StyledElementContainer = styled(Box)`
       width: 25px;
       height: 25px;
       background-color: #ff7402;
-      /* transition: all 0.2s ease-in-out 0s; */
+      transition: all 0.2s ease-in-out 0s;
       cursor: pointer;
 
       &:hover {
@@ -109,7 +98,6 @@ export const StyledElementContainer = styled(Box)`
       width: 16px;
       height: 16px;
       color: #fff;
-      /* transition: all 0.2s ease-in-out 0s; */
       font-size: 0.75rem;
     }
 

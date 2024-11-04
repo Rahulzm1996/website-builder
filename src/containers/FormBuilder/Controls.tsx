@@ -1,5 +1,4 @@
 import { Stack } from "@mui/material";
-import React from "react";
 import { SegmentedControl } from "../../components/SegmentedControl";
 import {
   NavBackButtonConfig,
@@ -24,23 +23,23 @@ const Controls = () => {
     >
       <SegmentedControl
         tabsConfig={NavBackButtonConfig}
-        onClick={(value) => console.log("formbuilder : ", { value })}
+        onClick={(value) => console.log("NavBackButtonConfig : ", { value })}
       />
       <SegmentedControl
         tabsConfig={viewSwitcher}
-        onClick={(value) => console.log("formbuilder : ", { value })}
+        onClick={(value) => console.log("viewSwitcher : ", { value })}
       />
       <SegmentedControl
         tabsConfig={settingsControls}
-        onClick={(value) => console.log("formbuilder : ", { value })}
+        onClick={(value) => console.log("settingsControls : ", { value })}
       />
       <SegmentedControl
         tabsConfig={editorControls}
-        onClick={(value) => console.log("formbuilder : ", { value })}
+        onClick={(value) => console.log("editorControls : ", { value })}
       />
       <SegmentedControl
         tabsConfig={previewControls}
-        onClick={(value) => console.log("formbuilder : ", { value })}
+        onClick={(value) => console.log("previewControls : ", { value })}
       />
     </Stack>
   );

@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@mui/material";
 import { AddNewRowPlaceholderStyles } from "./styles";
 
@@ -8,6 +7,7 @@ interface AddNewRowOrElementProps {
   variant?: "row" | "element";
   onClick: () => void;
 }
+
 const AddNewRowOrElement = ({
   buttonText,
   variant = "row",

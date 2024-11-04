@@ -5,7 +5,6 @@ import {
   FormLabel,
   Stack,
   TextField,
-  Typography,
 } from "@mui/material";
 import { ComponentProperties } from "../../types";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
@@ -65,8 +64,6 @@ const ImageEditor = ({
       return existingComponentProps?.styles;
     }
   }, [imageStyles, existingComponentProps?.styles]);
-
-  console.log("newImageStyles", { newImageStyles });
 
   return (
     <Stack spacing={2}>

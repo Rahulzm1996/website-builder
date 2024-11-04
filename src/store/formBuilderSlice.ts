@@ -8,25 +8,21 @@ const formBuilderSlice = createSlice({
   initialState: initialState,
   reducers: {
     toggleColumnDrawer: (state, { payload }) => {
-      // console.log("add new row reducer called : ", { state, payload });
       const { open, layoutAttributes } = payload || {};
       state.columnsDrawerConfig.open = open;
       state.columnsDrawerConfig.layoutAttributes = layoutAttributes;
     },
     addNewRow: (state, { payload }) => {
-      // console.log("add new row reducer called : ", { state, payload });
       const { sectionIdx, numberOfColumns } = payload || {};
       state.sections[sectionIdx].rows = getEmptyRow(numberOfColumns);
     },
     addMoreRow: (state, { payload }) => {
-      // console.log("add more reducer called : ", { state, payload });
       const { sectionIdx, numberOfColumns } = payload || {};
       state.sections[sectionIdx].rows = state.sections[sectionIdx].rows.concat(
         getEmptyRow(numberOfColumns)
       );
     },
     toggleAddElementsDrawer: (state, { payload }) => {
-      // console.log("add new row reducer called : ", { state, payload });
       const { open, elementAttributes } = payload || {};
       state.elementsDrawerConfig.open = open;
       state.elementsDrawerConfig.elementAttributes = elementAttributes;
@@ -34,7 +30,6 @@ const formBuilderSlice = createSlice({
     addElement: (state, { payload }) => {
       const { sectionIdx, rowIdx, columnIdx, componentToBeAdded } =
         payload || {};
-      //type and props will come from outside
       const currentColumn =
         state.sections[sectionIdx].rows[rowIdx].components[columnIdx];
       state.sections[sectionIdx].rows[rowIdx].components[columnIdx] = {
@@ -76,7 +71,6 @@ const formBuilderSlice = createSlice({
       );
     },
     toggleEditElementDrawer: (state, { payload }) => {
-      // console.log("add new row reducer called : ", { state, payload });
       const { open, editElementAttributes } = payload || {};
       state.editElementDrawerConfig.open = open;
       state.editElementDrawerConfig.editElementAttributes =

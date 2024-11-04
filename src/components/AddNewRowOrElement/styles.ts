@@ -5,8 +5,6 @@ export const AddNewRowPlaceholderStyles = styled(Box)<{
   variant?: "row" | "element";
 }>`
   display: block;
-  /* max-width: 1200px; */
-  /* margin: 0 auto; */
   width: 100%;
   height: fit-content;
   border-radius: 4px;

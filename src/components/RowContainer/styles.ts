@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import styled from "styled-components";
 
 export const StyledRowContainer = styled(Box)`
@@ -10,16 +10,12 @@ export const StyledRowContainer = styled(Box)`
   gap: 16px;
   box-sizing: border-box;
   padding: 16px;
-  /* max-width: 1200px;
-  margin: 0 auto; */
   transition: all 0.2s ease-in-out 0s;
   border: 2px solid transparent;
   position: relative;
-  /* padding: 16px; */
 
   .rowCreatorActions {
     opacity: 0;
-    /* transition: all 0.2s ease-in-out 0s; */
 
     .moveActions {
       display: flex;
@@ -40,16 +36,12 @@ export const StyledRowContainer = styled(Box)`
   }
 
   &:hover {
-    /* box-sizing: border-box; */
-    /* outline: 2px solid #188bf6; */
     border: 2px solid #188bf6;
     .rowCreatorActions {
       opacity: 1;
-      /* transition: all 0.2s ease-in-out 0s; */
     }
     .addNewRow {
       opacity: 1;
-      /* transition: all 0.2s ease-in-out 0s; */
     }
   }
 
@@ -71,7 +63,6 @@ export const StyledRowContainer = styled(Box)`
     width: 25px;
     height: 25px;
     background-color: #188bf6;
-    /* transition: all 0.2s ease-in-out 0s; */
     cursor: pointer;
 
     &:hover {
@@ -85,7 +76,6 @@ export const StyledRowContainer = styled(Box)`
     width: 16px;
     height: 16px;
     color: #fff;
-    /* transition: all 0.2s ease-in-out 0s; */
     font-size: 0.75rem;
   }
 
@@ -100,7 +90,7 @@ export const StyledRowContainer = styled(Box)`
     color: #fff;
     font-size: 12px;
     cursor: pointer;
-    /* transition: all 0.2s ease-in-out 0s; */
+    transition: all 0.2s ease-in-out 0s;
     position: absolute;
     margin: auto;
     left: 0;
@@ -125,7 +115,6 @@ export const StyledRowContainer = styled(Box)`
     padding-right: 15px;
     padding-left: 15px;
     padding: 25px;
-    /* border-right: 2px solid transparent; */
     flex: 1 0 0;
 
     &:hover {

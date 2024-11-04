@@ -17,6 +17,7 @@ interface CustomListEditorProps {
   existingComponentProps: ComponentProperties["props"];
   updateElementInColumn: (config: ComponentProperties["props"]) => void;
 }
+
 const CustomListEditor = ({
   existingComponentProps,
   updateElementInColumn,

@@ -1,5 +1,5 @@
 import { Button, TextField, Stack } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { ComponentProperties } from "../../types";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import FormLabel from "@mui/material/FormLabel";
@@ -9,6 +9,7 @@ interface HeadlineEditorProps {
   existingComponentProps: ComponentProperties["props"];
   updateElementInColumn: (config: ComponentProperties["props"]) => void;
 }
+
 const HeadlineEditor = ({
   existingComponentProps,
   updateElementInColumn,

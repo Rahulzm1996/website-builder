@@ -10,13 +10,8 @@ import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { StyledRowContainer } from "./styles";
-import { AddNewRowAndElementPlaceholder } from "../AddNewRowOrElement";
+import { useFormBuilderDispatch } from "../../store/store";
 import {
-  useFormBuilderDispatch,
-  useFormBuilderSelector,
-} from "../../store/store";
-import {
-  addMoreRow,
   cloneSectionRow,
   deleteSectionRow,
   moveSectionRow,
@@ -33,9 +28,6 @@ interface RowContainerProps {
 }
 const RowContainer = (props: RowContainerProps) => {
   const dispatch = useFormBuilderDispatch();
-  // const sections = useFormBuilderSelector(
-  //   (state) => state.formBuilder.sections
-  // );
   const {
     sectionIdx,
     rowIdx,
@@ -44,8 +36,8 @@ const RowContainer = (props: RowContainerProps) => {
     isLastRowOfSection,
     children,
   } = props || {};
+
   const handleAddMoreRow = () => {
-    // dispatch(addMoreRow({ sectionIdx }));
     dispatch(
       toggleColumnDrawer({
         open: true,

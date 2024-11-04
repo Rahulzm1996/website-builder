@@ -249,6 +249,13 @@ const CONFIG = [
 ];
 
 export const initialState: StoreState = {
+  //think about empty sections array here
+  /*
+  {
+      id: "1",
+      rows: [],
+    },
+  */
   sections: CONFIG,
   columnsDrawerConfig: {
     open: false,

@@ -1,5 +1,5 @@
 import { Button, TextField, Stack } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { ComponentProperties } from "../../types";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 import FormLabel from "@mui/material/FormLabel";
@@ -9,11 +9,11 @@ interface ParagraphEditorProps {
   existingComponentProps: ComponentProperties["props"];
   updateElementInColumn: (config: ComponentProperties["props"]) => void;
 }
+
 const ParagraphEditor = ({
   existingComponentProps,
   updateElementInColumn,
 }: ParagraphEditorProps) => {
-  console.log("ParagraphEditor--------");
   const [editedProps, setEditedProps] = useState(existingComponentProps ?? {});
   const [jsonText, setJsonText] = useState(
     JSON.stringify(existingComponentProps?.styles, null, 2)
