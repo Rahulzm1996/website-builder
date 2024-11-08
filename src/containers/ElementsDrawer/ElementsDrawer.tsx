@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { v4 as uuidv4 } from "uuid";
 import {
   addElement,
+  addMoreElement,
   toggleAddElementsDrawer,
 } from "../../store/formBuilderSlice";
 import {
@@ -38,7 +39,13 @@ const ElementsDrawer = ({ open }: ElementsDrawerProps) => {
   );
 
   const { elementAttributes } = elementsDrawerConfig || {};
-  const { sectionIdx, rowIdx, columnIdx } = elementAttributes || {};
+  const {
+    sectionIdx,
+    rowIdx,
+    columnIdx,
+    elementIdx,
+    mode = "new",
+  } = elementAttributes || {};
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredItems = DRAWER_ELEMENTS.filter((item) =>
@@ -67,20 +74,34 @@ const ElementsDrawer = ({ open }: ElementsDrawerProps) => {
   }) => {
     const { disable = true, type } = item || {};
     const defaultProps = componentDefaultPropsMap[type] || {};
-    const componentToBeAdded = {
+    const elementToBeAdded = {
       id: uuidv4(),
       type,
       props: defaultProps.fieldProps,
     };
     if (!disable) {
-      dispatch(
-        addElement({
-          sectionIdx,
-          rowIdx,
-          columnIdx,
-          componentToBeAdded,
-        })
-      );
+      if (mode === "existing") {
+        dispatch(
+          addMoreElement({
+            sectionIdx,
+            rowIdx,
+            columnIdx,
+            elementIdx,
+            elementToBeAdded,
+          })
+        );
+      } else {
+        dispatch(
+          addElement({
+            sectionIdx,
+            rowIdx,
+            columnIdx,
+            elementIdx,
+            elementToBeAdded,
+          })
+        );
+      }
+
       closeDrawer();
     }
   };

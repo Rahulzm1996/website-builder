@@ -1,8 +1,16 @@
-import { ComponentProperties } from "../../types";
+import { ComponentProperties, ElementProperties } from "../../types";
 
 export interface RenderColumnComponent {
   sectionIdx: number;
   rowIdx: number;
   columnIdx: number;
-  singleRowComponent: ComponentProperties;
+  singleColumnComponent: ComponentProperties;
+}
+
+export interface RenderColumnElementComponent {
+  sectionIdx: number;
+  rowIdx: number;
+  columnIdx: number;
+  elementIdx: number;
+  singleElementComponent: ElementProperties;
 }

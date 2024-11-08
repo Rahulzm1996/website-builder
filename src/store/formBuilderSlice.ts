@@ -31,16 +31,6 @@ const formBuilderSlice = createSlice({
       state.elementsDrawerConfig.open = open;
       state.elementsDrawerConfig.elementAttributes = elementAttributes;
     },
-    addElement: (state, { payload }) => {
-      const { sectionIdx, rowIdx, columnIdx, componentToBeAdded } =
-        payload || {};
-      const currentColumn =
-        state.sections[sectionIdx].rows[rowIdx].components[columnIdx];
-      state.sections[sectionIdx].rows[rowIdx].components[columnIdx] = {
-        ...currentColumn,
-        ...componentToBeAdded,
-      };
-    },
     moveSectionRow: (state, { payload }) => {
       const { sectionIdx, rowIdx, direction } = payload || {};
       const currentSectionRows = state.sections[sectionIdx].rows;
@@ -67,12 +57,50 @@ const formBuilderSlice = createSlice({
         (row) => row.id !== rowId
       );
     },
+    addElement: (state, { payload }) => {
+      const { sectionIdx, rowIdx, columnIdx, elementIdx, elementToBeAdded } =
+        payload || {};
+      const currentElement =
+        state.sections[sectionIdx].rows[rowIdx].components[columnIdx].elements[
+          elementIdx
+        ];
+      state.sections[sectionIdx].rows[rowIdx].components[columnIdx].elements[
+        elementIdx
+      ] = {
+        ...currentElement,
+        ...elementToBeAdded,
+      };
+    },
+    addMoreElement: (state, { payload }) => {
+      const { sectionIdx, rowIdx, columnIdx, elementIdx, elementToBeAdded } =
+        payload || {};
+      const currentColumnElements =
+        state.sections[sectionIdx].rows[rowIdx].components[columnIdx].elements;
+      currentColumnElements.splice(elementIdx + 1, 0, elementToBeAdded);
+      state.sections[sectionIdx].rows[rowIdx].components[columnIdx].elements =
+        currentColumnElements;
+    },
     cloneElement: (state, { payload }) => {
-      const { sectionIdx, rowId } = payload || {};
-      const currentSectionRows = state.sections[sectionIdx].rows;
-      state.sections[sectionIdx].rows = currentSectionRows.filter(
-        (row) => row.id !== rowId
-      );
+      const { sectionIdx, rowIdx, columnIdx, elementIdx } = payload || {};
+      const currentColumnElements =
+        state.sections[sectionIdx].rows[rowIdx].components[columnIdx].elements;
+      const elementToBeCloned =
+        state.sections[sectionIdx].rows[rowIdx].components[columnIdx].elements[
+          elementIdx
+        ];
+      currentColumnElements.splice(elementIdx + 1, 0, {
+        ...elementToBeCloned,
+        id: uuidv4(),
+      });
+      state.sections[sectionIdx].rows[rowIdx].components[columnIdx].elements =
+        currentColumnElements;
+    },
+    deleteElement: (state, { payload }) => {
+      const { sectionIdx, rowIdx, columnIdx, elementId } = payload || {};
+      const currentColumnElements =
+        state.sections[sectionIdx].rows[rowIdx].components[columnIdx].elements;
+      state.sections[sectionIdx].rows[rowIdx].components[columnIdx].elements =
+        currentColumnElements.filter((element) => element.id !== elementId);
     },
     toggleEditElementDrawer: (state, { payload }) => {
       const { open, editElementAttributes } = payload || {};
@@ -125,10 +153,12 @@ export const {
   addMoreRow,
   toggleAddElementsDrawer,
   addElement,
+  addMoreElement,
   moveSectionRow,
   cloneSectionRow,
   deleteSectionRow,
   cloneElement,
+  deleteElement,
   toggleEditElementDrawer,
   togglePreviewMode,
   addMoreSection,

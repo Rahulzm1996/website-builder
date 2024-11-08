@@ -2,7 +2,6 @@ import { Box, Stack, styled } from "@mui/material";
 
 export const AddNewRowOrElementwrapper = styled(Box)({
   display: "flex",
-  flex: "1 1 250px",
 });
 
 export const FormBuilderStyles = styled(Stack)<{ isMobileView?: boolean }>(

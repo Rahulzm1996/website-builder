@@ -1,9 +1,6 @@
-import { ComponentTypes } from "./contants";
-
-export interface ComponentProperties {
+export interface ElementProperties {
   id: string;
   type: string;
-  span?: number[];
   props?: {
     text?: string;
     styles?: React.CSSProperties;
@@ -12,6 +9,12 @@ export interface ComponentProperties {
     items?: string[];
     ordered?: boolean;
   };
+}
+
+export interface ComponentProperties {
+  id: string;
+  elements: Array<ElementProperties>;
+  span: number[];
 }
 
 export interface EmptyRow {
@@ -30,11 +33,14 @@ type ElementAttributes = {
   sectionIdx?: number;
   rowIdx?: number;
   columnIdx?: number;
+  elementIdx?: number;
+  mode?: "new" | "existing";
 };
 type EditElementAttributes = {
   sectionIdx: number;
   rowIdx: number;
   columnIdx: number;
+  elementIdx: number;
   type: string;
 };
 

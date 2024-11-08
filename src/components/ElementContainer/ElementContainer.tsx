@@ -10,6 +10,8 @@ import { StyledElementContainer } from "./styles";
 import { useFormBuilderDispatch } from "../../store/store";
 import {
   cloneElement,
+  deleteElement,
+  toggleAddElementsDrawer,
   toggleEditElementDrawer,
 } from "../../store/formBuilderSlice";
 
@@ -17,36 +19,63 @@ interface ElementContainerProps {
   sectionIdx: number;
   rowIdx: number;
   columnIdx: number;
+  elementIdx: number;
+  elementId: string;
   children: JSX.Element;
   type?: string;
 }
 
 const ElementContainer = (props: ElementContainerProps) => {
   const dispatch = useFormBuilderDispatch();
-  const { sectionIdx, rowIdx, columnIdx, type, children } = props || {};
+  const {
+    sectionIdx,
+    rowIdx,
+    columnIdx,
+    elementIdx,
+    elementId,
+    type,
+    children,
+  } = props || {};
 
   const handleElementSetting = () => {
     dispatch(
       toggleEditElementDrawer({
         open: true,
-        editElementAttributes: { sectionIdx, rowIdx, columnIdx, type },
+        editElementAttributes: {
+          sectionIdx,
+          rowIdx,
+          columnIdx,
+          elementIdx,
+          type,
+        },
       })
     );
   };
 
-  // const handleCloneElement = () => {
-  //   dispatch(cloneElement({ sectionIdx, rowIdx }));
-  // };
+  const handleCloneElement = () => {
+    dispatch(cloneElement({ sectionIdx, rowIdx, columnIdx, elementIdx }));
+  };
 
-  // const handleDeleteElement = () => {
-  //   console.log("handleDeleteElement");
-  // };
-  // const handleAddNewElement = () => {
-  //   console.log("handleAddNewElement");
-  // };
+  const handleDeleteElement = () => {
+    dispatch(deleteElement({ sectionIdx, rowIdx, columnIdx, elementId }));
+  };
+  const handleAddNewElement = () => {
+    dispatch(
+      toggleAddElementsDrawer({
+        open: true,
+        elementAttributes: {
+          sectionIdx,
+          rowIdx,
+          columnIdx,
+          elementIdx,
+          mode: "existing",
+        },
+      })
+    );
+  };
 
   return (
-    <StyledElementContainer>
+    <StyledElementContainer className="elementContainer">
       <Box className="elementCreatorActions">
         <Stack className="moreElementActions">
           <Tooltip
@@ -59,7 +88,7 @@ const ElementContainer = (props: ElementContainerProps) => {
               <SettingsOutlinedIcon className="icon" />
             </Stack>
           </Tooltip>
-          {/* <Tooltip title="Clone" placement="top" arrow>
+          <Tooltip title="Clone" placement="top" arrow>
             <Stack className="iconWrapper" onClick={handleCloneElement}>
               <RemoveRedEyeOutlinedIcon className="icon" />
             </Stack>
@@ -73,16 +102,16 @@ const ElementContainer = (props: ElementContainerProps) => {
             <Stack className="iconWrapper" onClick={handleDeleteElement}>
               <DeleteOutlineOutlinedIcon className="icon" />
             </Stack>
-          </Tooltip> */}
+          </Tooltip>
         </Stack>
       </Box>
-      {/* <Stack className="addNewElement">
+      <Stack className="addNewElement">
         <Tooltip title="Add New Element" placement="bottom" arrow>
           <Stack className="iconWrapper" onClick={handleAddNewElement}>
             <AddOutlinedIcon className="icon" />
           </Stack>
         </Tooltip>
-      </Stack> */}
+      </Stack>
 
       {children}
     </StyledElementContainer>

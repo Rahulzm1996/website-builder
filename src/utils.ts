@@ -5,8 +5,14 @@ import { ComponentTypes } from "./contants";
 const getEmptyRowComponent = () => {
   return {
     id: uuidv4(),
-    type: ComponentTypes.EMPTY_ELEMENT,
     span: [12],
+    elements: [
+      {
+        id: uuidv4(),
+        type: ComponentTypes.EMPTY_ELEMENT,
+        props: {},
+      },
+    ],
   };
 };
 

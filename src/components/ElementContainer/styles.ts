@@ -2,11 +2,11 @@ import { Box } from "@mui/material";
 import styled from "styled-components";
 
 export const StyledElementContainer = styled(Box)`
-  min-height: 104px;
+  min-height: 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  flex: 1 1 250px;
+  align-items: center;
   padding: 8px;
   transition: border 0.2s ease-in-out 0s;
   position: relative;

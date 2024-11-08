@@ -25,8 +25,9 @@ import {
 import { ElementSettingDrawer } from "../ElementSettingDrawer";
 import Controls from "./Controls";
 import { ColumnLayoutDrawer } from "../ColumnLayoutDrawer";
-import { RenderColumnComponent } from "./types";
+import { RenderColumnComponent, RenderColumnElementComponent } from "./types";
 import { AddNewRowOrElementwrapper, FormBuilderStyles } from "./styles";
+import React from "react";
 
 const FormBuilder = () => {
   const dispatch = useFormBuilderDispatch();
@@ -41,13 +42,23 @@ const FormBuilder = () => {
   const { open: showElementsDrawer } = elementsDrawerConfig || {};
   const { open: showEditElementsDrawer } = editElementDrawerConfig || {};
 
-  const renderColumnComponent = ({
+  const renderSingleElement = ({
     sectionIdx,
     rowIdx,
     columnIdx,
-    singleRowComponent,
-  }: RenderColumnComponent) => {
-    const { type, props } = singleRowComponent || {};
+    elementIdx,
+    singleElementComponent,
+  }: RenderColumnElementComponent) => {
+    const { type, props, id } = singleElementComponent || {};
+
+    const commonPropsForElements = {
+      sectionIdx: sectionIdx,
+      rowIdx: rowIdx,
+      columnIdx: columnIdx,
+      elementIdx: elementIdx,
+      elementId: id,
+      type: type,
+    };
 
     switch (type) {
       case ComponentTypes.EMPTY_ELEMENT: {
@@ -58,7 +69,13 @@ const FormBuilder = () => {
                 dispatch(
                   toggleAddElementsDrawer({
                     open: true,
-                    elementAttributes: { sectionIdx, rowIdx, columnIdx },
+                    elementAttributes: {
+                      sectionIdx,
+                      rowIdx,
+                      columnIdx,
+                      elementIdx,
+                      mode: "new",
+                    },
                   })
                 );
               }}
@@ -72,11 +89,8 @@ const FormBuilder = () => {
         return (
           <DynamicElementContainer
             component={Headline}
-            sectionIdx={sectionIdx}
-            rowIdx={rowIdx}
-            columnIdx={columnIdx}
-            type={type}
             {...props}
+            {...commonPropsForElements}
           />
         );
       }
@@ -84,11 +98,8 @@ const FormBuilder = () => {
         return (
           <DynamicElementContainer
             component={SubHeadline}
-            sectionIdx={sectionIdx}
-            rowIdx={rowIdx}
-            columnIdx={columnIdx}
-            type={type}
             {...props}
+            {...commonPropsForElements}
           />
         );
       }
@@ -96,11 +107,8 @@ const FormBuilder = () => {
         return (
           <DynamicElementContainer
             component={Paragraph}
-            sectionIdx={sectionIdx}
-            rowIdx={rowIdx}
-            columnIdx={columnIdx}
-            type={type}
             {...props}
+            {...commonPropsForElements}
           />
         );
       }
@@ -108,11 +116,8 @@ const FormBuilder = () => {
         return (
           <DynamicElementContainer
             component={CustomImage}
-            sectionIdx={sectionIdx}
-            rowIdx={rowIdx}
-            columnIdx={columnIdx}
-            type={type}
             {...props}
+            {...commonPropsForElements}
           />
         );
       }
@@ -120,17 +125,57 @@ const FormBuilder = () => {
         return (
           <DynamicElementContainer
             component={CustomList}
-            sectionIdx={sectionIdx}
-            rowIdx={rowIdx}
-            columnIdx={columnIdx}
-            type={type}
             {...props}
+            {...commonPropsForElements}
           />
         );
       }
       default:
         break;
     }
+  };
+
+  const renderColumnWithElements = ({
+    sectionIdx,
+    rowIdx,
+    columnIdx,
+    singleColumnComponent,
+  }: RenderColumnComponent) => {
+    const { id, elements } = singleColumnComponent || {};
+
+    return (
+      <>
+        <Stack
+          key={id}
+          gap={1}
+          className="columnElementsContainer"
+          sx={{
+            minHeight: "40px",
+            display: "flex",
+            flexWrap: "wrap",
+            flex: "1 1 250px",
+            padding: "8px",
+            transition: "border 0.2s ease-in-out 0s",
+            position: "relative",
+            border: "2px solid transparent",
+          }}
+        >
+          {elements?.map((singleElementComponent, elementIdx) => {
+            return (
+              <React.Fragment key={singleElementComponent.id}>
+                {renderSingleElement({
+                  sectionIdx,
+                  rowIdx,
+                  columnIdx,
+                  elementIdx,
+                  singleElementComponent,
+                })}
+              </React.Fragment>
+            );
+          })}
+        </Stack>
+      </>
+    );
   };
 
   const isMobileView = viewMode === "mobile";
@@ -167,12 +212,12 @@ const FormBuilder = () => {
                       >
                         {() => {
                           return components.map(
-                            (singleRowComponent, columnIdx) =>
-                              renderColumnComponent({
+                            (singleColumnComponent, columnIdx) =>
+                              renderColumnWithElements({
                                 sectionIdx,
                                 rowIdx,
                                 columnIdx,
-                                singleRowComponent,
+                                singleColumnComponent,
                               })
                           );
                         }}

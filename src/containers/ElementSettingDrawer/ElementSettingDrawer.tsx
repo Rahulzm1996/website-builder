@@ -27,9 +27,12 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
   );
 
   const { editElementAttributes } = editElementDrawerConfig || {};
-  const { sectionIdx, rowIdx, columnIdx, type } = editElementAttributes || {};
-  const existingComponentConfig =
-    sections?.[sectionIdx]?.rows?.[rowIdx]?.components?.[columnIdx] || {};
+  const { sectionIdx, rowIdx, columnIdx, elementIdx, type } =
+    editElementAttributes || {};
+  const existingElementConfig =
+    sections?.[sectionIdx]?.rows?.[rowIdx]?.components?.[columnIdx]?.elements?.[
+      elementIdx
+    ] || {};
 
   const closeDrawer = () => {
     dispatch(
@@ -44,8 +47,8 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
   };
 
   const updateElementInColumn = (props: ComponentProperties["props"]) => {
-    const componentToBeAdded = {
-      ...existingComponentConfig,
+    const elementToBeAdded = {
+      ...existingElementConfig,
       props: props,
     };
 
@@ -54,7 +57,8 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
         sectionIdx,
         rowIdx,
         columnIdx,
-        componentToBeAdded,
+        elementIdx,
+        elementToBeAdded,
       })
     );
     closeDrawer();
@@ -66,7 +70,7 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
       case ComponentTypes.SUB_HEADLINE: {
         return (
           <HeadlineEditor
-            existingComponentProps={existingComponentConfig?.props || {}}
+            existingComponentProps={existingElementConfig?.props || {}}
             updateElementInColumn={updateElementInColumn}
           />
         );
@@ -74,7 +78,7 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
       case ComponentTypes.PARAGRAPH: {
         return (
           <ParagraphEditor
-            existingComponentProps={existingComponentConfig?.props || {}}
+            existingComponentProps={existingElementConfig?.props || {}}
             updateElementInColumn={updateElementInColumn}
           />
         );
@@ -82,7 +86,7 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
       case ComponentTypes.IMAGE: {
         return (
           <ImageEditor
-            existingComponentProps={existingComponentConfig?.props || {}}
+            existingComponentProps={existingElementConfig?.props || {}}
             updateElementInColumn={updateElementInColumn}
           />
         );
@@ -90,7 +94,7 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
       case ComponentTypes.LIST: {
         return (
           <CustomListEditor
-            existingComponentProps={existingComponentConfig?.props || {}}
+            existingComponentProps={existingElementConfig?.props || {}}
             updateElementInColumn={updateElementInColumn}
           />
         );

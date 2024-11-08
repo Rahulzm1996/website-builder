@@ -38,13 +38,13 @@ export const initialState: StoreState = {
       columnIdx: 0,
     },
   },
-
   editElementDrawerConfig: {
     open: false,
     editElementAttributes: {
       sectionIdx: 0,
       rowIdx: 0,
       columnIdx: 0,
+      elementIdx: 0,
       type: "",
     },
   },
