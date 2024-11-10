@@ -5,7 +5,7 @@ export const AddNewRowOrElementwrapper = styled(Box)({
 });
 
 export const FormBuilderStyles = styled(Stack)<{ isMobileView?: boolean }>(
-  ({ _, isMobileView }) => ({
+  ({ isMobileView }) => ({
     width: "100%",
     height: "100%",
     flex: 1,

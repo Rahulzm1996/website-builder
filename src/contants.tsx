@@ -14,6 +14,7 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import { v4 as uuidv4 } from "uuid";
 
+//Initial state for redux store
 export const initialState: StoreState = {
   sections: [
     {
@@ -50,6 +51,9 @@ export const initialState: StoreState = {
   },
 };
 
+/**
+ * Map for rendering different types of components.
+ */
 export const ComponentTypes = {
   EMPTY_ROW: "EMPTY_ROW",
   EMPTY_ELEMENT: "EMPTY_ELEMENT",
@@ -67,14 +71,15 @@ export const ComponentTypes = {
   CHECKBOX: "CHECKBOX",
 };
 
+/**
+ * Map to get default props for different components.
+ */
 export const componentDefaultPropsMap = {
   [ComponentTypes.HEADLINE]: {
-    // type: "onFiled" | "drawer";
+    // type: "onFiled" | "drawer"; //indicates how we can edit the element like onField or by opening a drawer
     fieldProps: {
       text: "Heading text...",
       styles: {},
-      // placeholder: "",
-      // defaultValue: "",
     },
   },
   [ComponentTypes.SUB_HEADLINE]: {
@@ -82,8 +87,6 @@ export const componentDefaultPropsMap = {
     fieldProps: {
       text: "Sub heading text...",
       styles: {},
-      // placeholder: "",
-      // defaultValue: "",
     },
   },
   [ComponentTypes.PARAGRAPH]: {
@@ -91,8 +94,6 @@ export const componentDefaultPropsMap = {
     fieldProps: {
       text: "Paragraph text",
       styles: {},
-      // placeholder: "",
-      // defaultValue: "",
     },
   },
   [ComponentTypes.LIST]: {

@@ -4,19 +4,73 @@ import Tooltip from "@mui/material/Tooltip";
 import { StyledTab, StyledTabs } from "./styles";
 
 interface SegmentedControlProps {
+  /**
+   * The currently selected value in the segmented control.
+   * Can be a number or a string.
+   */
   value?: number | string;
+
+  /**
+   * The default value for the segmented control when it first renders.
+   * Can be a number or a string.
+   */
   defaultValue?: number | string;
+
+  /**
+   * Configuration array for each tab in the segmented control.
+   * Each object in the array represents an individual tab's settings.
+   */
   tabsConfig: Array<{
+    /**
+     * Optional label to display on the tab.
+     */
     label?: string;
+
+    /**
+     * The unique value associated with the tab.
+     * Used to identify which tab is selected.
+     */
     value?: string;
+
+    /**
+     * Optional icon to display alongside the tab label.
+     * Should be a JSX element, such as an SVG or icon component.
+     */
     icon?: JSX.Element;
+
+    /**
+     * Type of the tab, used to categorize or style tabs differently.
+     */
     type: string;
+
+    /**
+     * Optional list of menu options associated with the tab.
+     * Used for tabs with dropdown or additional options.
+     */
     menuOptions?: string[];
+
+    /**
+     * Optional tooltip configuration for the tab.
+     * Displays a tooltip with specified title and position when the tab is hovered.
+     */
     tooltip?: {
+      /**
+       * Text to display within the tooltip.
+       */
       title: string;
+
+      /**
+       * Position of the tooltip relative to the tab.
+       * Possible values might include "top", "bottom", "left", or "right".
+       */
       position: string;
     };
   }>;
+
+  /**
+   * Callback function triggered when a tab is clicked.
+   * Receives the `value` of the clicked tab, or `undefined` if no value is set.
+   */
   onClick: (value: string | undefined) => void;
 }
 

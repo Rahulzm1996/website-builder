@@ -11,11 +11,11 @@ import {
 } from "@mui/material";
 import { Add, Delete } from "@mui/icons-material";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
-import { ComponentProperties } from "../../types";
+import { ElementProperties } from "../../types";
 
 interface CustomListEditorProps {
-  existingComponentProps: ComponentProperties["props"];
-  updateElementInColumn: (config: ComponentProperties["props"]) => void;
+  existingComponentProps: ElementProperties["props"];
+  updateElementInColumn: (config: ElementProperties["props"]) => void;
 }
 
 const CustomListEditor = ({

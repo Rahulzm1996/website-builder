@@ -6,12 +6,12 @@ import {
   Stack,
   TextField,
 } from "@mui/material";
-import { ComponentProperties } from "../../types";
+import { ElementProperties } from "../../types";
 import { TextareaAutosize as BaseTextareaAutosize } from "@mui/base/TextareaAutosize";
 
 interface ImageEditorProps {
-  existingComponentProps: ComponentProperties["props"];
-  updateElementInColumn: (props: ComponentProperties["props"]) => void;
+  existingComponentProps: ElementProperties["props"];
+  updateElementInColumn: (props: ElementProperties["props"]) => void;
 }
 
 const ImageEditor = ({

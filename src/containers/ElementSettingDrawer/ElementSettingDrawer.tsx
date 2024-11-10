@@ -10,7 +10,7 @@ import {
 } from "../../store/store";
 import { ComponentTypes } from "../../contants";
 import { HeadlineEditor } from "../../components/Headline";
-import { ComponentProperties } from "../../types";
+import { ElementProperties } from "../../types";
 import { ImageEditor } from "../../components/CustomImage";
 import { CustomListEditor } from "../../components";
 import { ParagraphEditor } from "../../components/Paragraph";
@@ -46,7 +46,7 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
     }
   };
 
-  const updateElementInColumn = (props: ComponentProperties["props"]) => {
+  const updateElementInColumn = (props: ElementProperties["props"]) => {
     const elementToBeAdded = {
       ...existingElementConfig,
       props: props,
@@ -64,7 +64,7 @@ const ElementSettingDrawer = ({ open }: ElementsDrawerProps) => {
     closeDrawer();
   };
 
-  const getComponentEditors = (type: ComponentProperties["type"]) => {
+  const getComponentEditors = (type: ElementProperties["type"]) => {
     switch (type) {
       case ComponentTypes.HEADLINE:
       case ComponentTypes.SUB_HEADLINE: {

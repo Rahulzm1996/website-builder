@@ -12,7 +12,25 @@ import {
 } from "../../store/formBuilderSlice";
 import { Header, LayoutCard, StyledColumnDrawer } from "./styles";
 
-const layoutOptions = [
+type LayoutOption = {
+  /**
+   * Label to display in the UI,
+   * representing the column layout (e.g., "1 column", "2 columns").
+   */
+  label: string;
+
+  /**
+   * Numeric value representing the number of columns (e.g., 1, 2).
+   */
+  value: number;
+
+  /**
+   * Indicates if the option is currently disabled and cannot be added as a column.
+   * This can be enabled and added in the future if needed.
+   */
+  disable: boolean;
+};
+const layoutOptions: LayoutOption[] = [
   { label: "1 COLUMN", value: 1, disable: false },
   { label: "2 COLUMN", value: 2, disable: false },
   { label: "3 COLUMN", value: 3, disable: false },

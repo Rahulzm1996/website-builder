@@ -42,6 +42,9 @@ const FormBuilder = () => {
   const { open: showElementsDrawer } = elementsDrawerConfig || {};
   const { open: showEditElementsDrawer } = editElementDrawerConfig || {};
 
+  /**
+   * The renderSingleElement function renders an individual element within a column based on its type (e.g., HEADLINE, IMAGE, etc.). It applies common properties and wraps the element in the appropriate component, using DynamicElementContainer for dynamic rendering. If the element is of type EMPTY_ELEMENT, it displays an "Add new Element" button instead.
+   */
   const renderSingleElement = ({
     sectionIdx,
     rowIdx,
@@ -135,6 +138,9 @@ const FormBuilder = () => {
     }
   };
 
+  /**
+   * The renderColumnWithElements function renders a column containing multiple elements within a specified section and row. It wraps each element in a Stack component, applying consistent styling and using renderSingleElement to render each element individually.
+   */
   const renderColumnWithElements = ({
     sectionIdx,
     rowIdx,
